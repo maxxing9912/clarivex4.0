@@ -360,14 +360,14 @@
           if (user.avatar) {
             // If avatar hash starts with "a_", use .gif; otherwise .png
             const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
-            avatarUrl = https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=64;
+            avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=64`;
           } else {
             // Default avatar (when user.avatar is null)
-            avatarUrl = https://cdn.discordapp.com/embed/avatars/${parseInt(user.discriminator) % 5}.png;
+            avatarUrl = `https://cdn.discordapp.com/embed/avatars/${parseInt(user.discriminator) % 5}.png`;
           }
 
           avatarElm.src             = avatarUrl;
-          usernameTagElm.textContent = ${user.username}#${user.discriminator};
+          usernameTagElm.textContent = `${user.username}#${user.discriminator}`;
           userInfoContainer.style.display = 'flex';
 
           // Show Logout button
@@ -508,7 +508,7 @@
         this.y    = Math.random() * -cvs.height;
         this.r    = Math.random() * 5 + 3;
         this.sp   = Math.random() * 3 + 2;
-        this.c    = hsl(${Math.random() * 360},70%,60%);
+        this.c    = `hsl(${Math.random() * 360},70%,60%)`;
         this.tilt = Math.random() * 10 - 10;
         this.ts   = Math.random() * .1 + .05;
       }
