@@ -103,27 +103,6 @@
         <div class="icon-circle mx-auto"><svg class="w-6 h-6" fill="currentColor"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16h6"/></svg></div>
         <h4 class="subheading">Dedicated Support</h4>
         <p>Community‑driven help desk with power users and developers on call 24/7. Tickets, live chat, and in‑Discord help channels keep you moving forward.</p>
-            <!-- New: Why choose Clan Labs? -->
-    <div class="card text-center" data-aos="fade-up" data-aos-delay="300">
-      <div class="icon-circle mx-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 12H9v-2h2v2zm0-4H9V6h2v4z"/>
-        </svg>
-      </div>
-      <h4 class="subheading">A proven, useful group tool</h4>
-      <p>Gestisci ogni aspetto del tuo server con interfaccia console e comandi rapidi. Modularità totale per crescere insieme alla tua community.</p>
-    </div>
-
-    <!-- New: Customer Support -->
-    <div class="card text-center" data-aos="fade-up" data-aos-delay="400">
-      <div class="icon-circle mx-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4l-4 4V5z"/>
-        </svg>
-      </div>
-      <h4 class="subheading">Customer Support</h4>
-      <p>Assistenza via live chat e ticket 24/7, con staff e sviluppatori sempre pronti a intervenire.</p>
-    </div>
       </div>
     </div>
   </section>
@@ -616,7 +595,7 @@
         this.y = Math.random() * -canvas.height;
         this.r = Math.random() * 5 + 3;
         this.sp = Math.random() * 3 + 2;
-        this.c = hsl(${Math.random() * 360},70%,60%);
+        this.c = `hsl(${Math.random() * 360},70%,60%)`;
         this.tilt = Math.random() * 10 - 10;
         this.ts = Math.random() * .1 + .05;
       }
