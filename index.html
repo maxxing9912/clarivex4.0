@@ -10,21 +10,18 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <style>
-    /* THEME */
-    body.light { background: #f9fafb; color: #1e293b; }
-    body.dark  { background: #0f172a; color: #f1f5f9; }
+    /* GLOBAL TEXT COLOR */
+    body {
+      color: #ffffff;
+    }
 
     /* LOADER */
     #loader {
-      position: fixed; inset:0;
+      position: fixed; inset: 0;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      background: linear-gradient(135deg,#0f172a,#1e293b);
+      background: linear-gradient(135deg, #0f172a, #1e293b);
       color: #38bdf8; z-index: 9999; transition: opacity .5s;
-    }
-    body.light #loader {
-      background: linear-gradient(135deg,#f1f5f9,#e2e8f0);
-      color: #4f46e5;
     }
     .spinner {
       width: 100px; height: 100px;
@@ -40,10 +37,9 @@
     header {
       position: sticky; top: 0; backdrop-filter: blur(8px);
       padding: 1.5rem 0; transition: all .4s ease;
+      background: rgba(31,41,55,.8);
     }
     header.shrink { padding: .75rem 0; }
-    body.light header { background: rgba(255,255,255,.8); }
-    body.dark  header { background: rgba(31,41,55,.8); }
 
     /* NAV LINKS */
     .nav-link {
@@ -57,33 +53,6 @@
     }
     .nav-link:hover::after,
     .nav-link.active::after { width: 100%; }
-
-    /* DISCORD LOGIN BAR */
-    #discordBar {
-      background: #111827;
-      color: #a5b4fc;
-    }
-    #discordUserInfo {
-      display: none;
-      align-items: center;
-      gap: .5rem;
-    }
-    #discordUserInfo img {
-      width: 32px; height: 32px; border-radius: 50%;
-    }
-    #discordUserInfo span {
-      color: #38bdf8; font-weight: 500;
-    }
-    #discordLoginBtn {
-      background-color: #7289da;
-      color: white; font-weight: bold;
-      padding: .5rem 1rem; border-radius: .375rem;
-      text-decoration: none; transition: background-color .3s;
-      display: none;
-    }
-    #discordLoginBtn:hover {
-      background-color: #5b6eae;
-    }
 
     /* COOKIE BANNER */
     #cookieBanner {
@@ -99,13 +68,11 @@
       padding: .5rem 1rem; border-radius: .5rem;
       cursor: pointer; transition: background .3s;
     }
-    #cookieBanner button:hover {
-      background: #7c3aed;
-    }
+    #cookieBanner button:hover { background: #7c3aed; }
 
     /* HERO */
     .animated-gradient {
-      background: linear-gradient(-45deg,#4f46e5,#3b82f6,#06b6d4,#8b5cf6);
+      background: linear-gradient(-45deg, #4f46e5, #3b82f6, #06b6d4, #8b5cf6);
       background-size: 400% 400%; animation: gradientBG 15s ease infinite;
     }
     @keyframes gradientBG {
@@ -181,7 +148,7 @@
       cursor: pointer;
     }
 
-    /* CONFETTI */
+    /* CONFETTI CANVAS */
     #confettiCanvas {
       position: fixed; inset: 0; pointer-events: none;
       opacity: 0; transition: opacity .5s;
@@ -198,21 +165,7 @@
     #backToTop.show { opacity: 1; pointer-events: auto; }
   </style>
 </head>
-<body class="dark">
-
-  <!-- DISCORD LOGIN/USER INFO BAR -->
-  <div
-    id="discordBar"
-    class="fixed top-0 left-0 right-0 bg-gray-900 text-indigo-400 p-2 flex justify-end items-center z-50"
-  >
-    <!-- Will show avatar + username#discriminator when logged in -->
-    <span id="discordUserInfo">
-      <img id="discordAvatar" src="" alt="Avatar" />
-      <span id="discordUsernameTag"></span>
-    </span>
-    <!-- Shown when NOT logged in -->
-    <a id="discordLoginBtn" href="/auth/discord">Login with Discord</a>
-  </div>
+<body>
 
   <!-- LOADER -->
   <div id="loader">
@@ -226,7 +179,7 @@
     <button id="acceptCookies">Accept</button>
   </div>
 
-  <!-- CONTENT -->
+  <!-- MAIN CONTENT -->
   <div id="content" class="opacity-0 transition-opacity duration-500 mt-12">
 
     <!-- HEADER -->
@@ -235,30 +188,27 @@
         <h1 class="text-3xl font-extrabold select-none">Clarivex</h1>
         <nav class="hidden md:flex">
           <a class="nav-link active" data-target="hero">Home</a>
-          <a class="nav-link" href="https://clarivex-pricing2.vercel.app//">Pricing</a>
+          <a class="nav-link" href="https://clarivex-pricing2.vercel.app/">Pricing</a>
           <a class="nav-link" href="tos.html">Terms</a>
           <a class="nav-link" href="privacy.html">Privacy</a>
           <a class="nav-link" href="support.html">Support</a>
         </nav>
-        <div class="flex items-center gap-4">
-          <button id="darkModeToggle" class="p-2 rounded-full">🌓</button>
-          <button id="hamburger" class="md:hidden flex flex-col gap-1">
-            <span class="block w-6 h-1 bg-indigo-400"></span>
-            <span class="block w-6 h-1 bg-indigo-400"></span>
-            <span class="block w-6 h-1 bg-indigo-400"></span>
-          </button>
-        </div>
+        <button id="hamburger" class="md:hidden flex flex-col gap-1">
+          <span class="block w-6 h-1 bg-indigo-400"></span>
+          <span class="block w-6 h-1 bg-indigo-400"></span>
+          <span class="block w-6 h-1 bg-indigo-400"></span>
+        </button>
       </div>
       <nav id="mobileNav" class="hidden flex-col bg-gray-800 text-indigo-400 p-6 space-y-4">
         <a class="nav-link" data-target="hero">Home</a>
         <a class="nav-link" href="pricing.html">Pricing</a>
-        <a href="tos.html" class="nav-link">Terms</a>
-        <a href="privacy.html" class="nav-link">Privacy</a>
-        <a href="support.html" class="nav-link">Support</a>
+        <a class="nav-link" href="tos.html">Terms</a>
+        <a class="nav-link" href="privacy.html">Privacy</a>
+        <a class="nav-link" href="support.html">Support</a>
       </nav>
     </header>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section id="hero" class="animated-gradient relative text-center py-32 overflow-hidden">
       <div class="particle w-8 h-8" style="--dx:20px;--dy:-30px;left:15%;top:25%;"></div>
       <div class="particle w-6 h-6" style="--dx:-15px;--dy:25px;left:75%;top:35%;animation-delay:2s;"></div>
@@ -273,15 +223,14 @@
           id="joinBtn"
           href="https://discord.gg/KSnKbWxyqx"
           target="_blank"
-          class="cta-btn bg-white dark:bg-gray-900 dark:text-white text-gray-900 font-bold py-3 px-6 rounded-full shadow-lg inline-block relative"
+          class="cta-btn bg-white text-gray-900 font-bold py-3 px-6 rounded-full shadow-lg inline-block relative"
         >
           Join Discord
         </a>
-        </div>
       </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- FEATURES SECTION -->
     <section class="bg-gray-800 py-20">
       <div class="container mx-auto grid md:grid-cols-3 gap-10 px-6 max-w-6xl">
         <div class="feature-card" data-feature="Advanced Moderation" data-aos="fade-up">
@@ -311,7 +260,7 @@
       </div>
     </div>
 
-    <!-- CTA + CONFETTI -->
+    <!-- CALL TO ACTION -->
     <section class="text-center py-16 px-6">
       <a
         id="ctaBtn"
@@ -333,7 +282,7 @@
       <p class="mt-4">&copy; 2025 Clarivex. All rights reserved.</p>
     </footer>
 
-    <!-- BACK TO TOP -->
+    <!-- BACK TO TOP BUTTON -->
     <button id="backToTop" title="Back to top">↑</button>
   </div>
 
@@ -341,58 +290,14 @@
   <script>
     AOS.init({ once: true, duration: 800, easing: 'ease-in-out' });
 
-    /* DISCORD LOGIN CHECK */
-    window.addEventListener('DOMContentLoaded', () => {
-      fetch('/api/me')
-        .then(res => {
-          if (!res.ok) throw new Error('Not logged in');
-          return res.json();
-        })
-        .then(user => {
-          // If logged in, show avatar + tag, hide login button
-          const avatarElm         = document.getElementById('discordAvatar');
-          const usernameTagElm    = document.getElementById('discordUsernameTag');
-          const userInfoContainer = document.getElementById('discordUserInfo');
-          const loginBtn          = document.getElementById('discordLoginBtn');
-
-          // Construct Discord avatar URL (handle animated vs. static)
-          let avatarUrl;
-          if (user.avatar) {
-            // If avatar hash starts with "a_", use .gif; otherwise .png
-            const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
-            avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=64`;
-          } else {
-            // Default avatar (when user.avatar is null)
-            avatarUrl = `https://cdn.discordapp.com/embed/avatars/${parseInt(user.discriminator) % 5}.png`;
-          }
-
-          avatarElm.src             = avatarUrl;
-          usernameTagElm.textContent = `${user.username}#${user.discriminator}`;
-          userInfoContainer.style.display = 'flex';
-
-          // Show Logout button
-          loginBtn.textContent = 'Logout';
-          loginBtn.href        = '/logout';
-          loginBtn.style.display = 'inline-block';
-        })
-        .catch(() => {
-          // If not logged in, show only Login button
-          document.getElementById('discordUserInfo').style.display = 'none';
-          const loginBtn = document.getElementById('discordLoginBtn');
-          loginBtn.textContent = 'Login with Discord';
-          loginBtn.href = '/auth/discord';
-          loginBtn.style.display = 'inline-block';
-        });
-    });
-
     /* LOADER */
-    let pct  = 0;
-    let prog = document.getElementById('progress');
-    let li   = setInterval(() => {
+    let pct = 0;
+    const prog = document.getElementById('progress');
+    const loaderInterval = setInterval(() => {
       pct += 5;
       prog.textContent = pct + '%';
       if (pct >= 100) {
-        clearInterval(li);
+        clearInterval(loaderInterval);
         document.getElementById('loader').style.opacity = 0;
         setTimeout(() => {
           document.getElementById('loader').style.display = 'none';
@@ -402,123 +307,101 @@
     }, 50);
 
     /* COOKIE BANNER */
-    const cb = document.getElementById('cookieBanner'),
-          ac = document.getElementById('acceptCookies');
+    const cookieBanner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('acceptCookies');
     if (!localStorage.getItem('cookiesAccepted')) {
-      setTimeout(() => cb.classList.add('show'), 800);
+      setTimeout(() => cookieBanner.classList.add('show'), 800);
     }
-    ac.onclick = () => {
+    acceptBtn.onclick = () => {
       localStorage.setItem('cookiesAccepted', 'yes');
-      cb.classList.remove('show');
+      cookieBanner.classList.remove('show');
     };
-
-    /* THEME TOGGLE */
-    const dm = document.getElementById('darkModeToggle');
-    dm.onclick = () => {
-      document.body.classList.toggle('dark');
-      document.body.classList.toggle('light');
-      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-    };
-    if (localStorage.getItem('theme') === 'light') {
-      document.body.classList.add('light');
-      document.body.classList.remove('dark');
-    }
 
     /* HEADER SHRINK & BACK TO TOP */
-    const hdr    = document.getElementById('header'),
-          topBtn = document.getElementById('backToTop');
+    const header = document.getElementById('header');
+    const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-      window.scrollY > 30  ? hdr.classList.add('shrink')  : hdr.classList.remove('shrink');
-      window.scrollY > 300 ? topBtn.classList.add('show') : topBtn.classList.remove('show');
+      window.scrollY > 30  ? header.classList.add('shrink') : header.classList.remove('shrink');
+      window.scrollY > 300 ? backToTop.classList.add('show') : backToTop.classList.remove('show');
     });
-    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    backToTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    /* MOBILE NAV */
-    const ham = document.getElementById('hamburger'),
-          mob = document.getElementById('mobileNav');
-    ham.onclick = () => {
-      mob.classList.toggle('hidden');
-      ham.classList.toggle('open');
+    /* MOBILE NAVIGATION */
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.onclick = () => {
+      mobileNav.classList.toggle('hidden');
+      hamburger.classList.toggle('open');
     };
 
-    /* TYPEWRITER */
+    /* TYPEWRITER EFFECT */
     (function() {
-      const words = ["Advanced Moderation.","XP & Leveling.","Premium Unlocks.","Powerful & Easy."],
-            wrap  = document.querySelector('.wrap');
-      let wi = 0, ci = 0, del = false;
-      (function t() {
-        let full = words[wi];
-        if (!del) {
-          wrap.textContent = full.substr(0, ++ci);
-          if (ci === full.length) { del = true; return setTimeout(t, 1500); }
+      const words = ["Advanced Moderation.","XP & Leveling.","Premium Unlocks.","Powerful & Easy."];
+      const wrap  = document.querySelector('.wrap');
+      let wi = 0, ci = 0, deleting = false;
+      (function type() {
+        const current = words[wi];
+        if (!deleting) {
+          wrap.textContent = current.substr(0, ++ci);
+          if (ci === current.length) { deleting = true; return setTimeout(type, 1500); }
         } else {
-          wrap.textContent = full.substr(0, --ci);
-          if (ci === 0) { del = false; wi = (wi + 1) % words.length; }
+          wrap.textContent = current.substr(0, --ci);
+          if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
         }
-        setTimeout(t, del ? 50 : 120);
+        setTimeout(type, deleting ? 50 : 120);
       })();
     })();
 
-    /* TOOLTIP */
-    const jb = document.getElementById('joinBtn'),
-          tt = document.getElementById('joinTooltip'),
-          oc = document.getElementById('onlineCount');
-    oc.textContent = Math.floor(Math.random() * 200) + 50;
-    jb.onmouseenter = () => {
-      tt.classList.remove('hidden');
-      tt.style.opacity = 1;
-    };
-    jb.onmouseleave = () => {
-      tt.style.opacity = 0;
-      setTimeout(() => tt.classList.add('hidden'), 300);
-    };
-
-    /* MODAL */
+    /* MODAL DETAILS */
     const details = {
       "Advanced Moderation": "Smart commands, filters & logs.",
       "XP & Levels":        "Experience, ranks & leaderboards.",
       "Premium Unlocks":    "Redeem keys for exclusive commands."
-    },
-    lb    = document.querySelectorAll('.learn-btn'),
-    modal = document.getElementById('modal'),
-    mT    = document.getElementById('modalTitle'),
-    mB    = document.getElementById('modalBody'),
-    mC    = document.getElementById('modalClose');
-    lb.forEach(b => b.onclick = e => {
-      let f = e.target.closest('.feature-card').dataset.feature;
-      mT.textContent = f;
-      mB.textContent = details[f];
-      modal.classList.add('show');
+    };
+    document.querySelectorAll('.learn-btn').forEach(btn => {
+      btn.onclick = e => {
+        const feature = e.target.closest('.feature-card').dataset.feature;
+        document.getElementById('modalTitle').textContent = feature;
+        document.getElementById('modalBody').textContent = details[feature];
+        document.getElementById('modal').classList.add('show');
+      };
     });
-    mC.onclick = () => modal.classList.remove('show');
-    modal.onclick = e => { if (e.target === modal) modal.classList.remove('show'); };
+    document.getElementById('modalClose').onclick = () => {
+      document.getElementById('modal').classList.remove('show');
+    };
+    document.getElementById('modal').onclick = e => {
+      if (e.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('show');
+      }
+    };
 
-    /* CONFETTI */
-    const cvs = document.getElementById('confettiCanvas'),
-          ctx = cvs.getContext('2d');
-    function resize() {
-      cvs.width  = innerWidth;
-      cvs.height = innerHeight;
+    /* CONFETTI EFFECT */
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width  = innerWidth;
+      canvas.height = innerHeight;
     }
-    window.onresize = resize;
-    resize();
-    class P {
+    window.onresize = resizeCanvas;
+    resizeCanvas();
+
+    class Particle {
       constructor() {
-        this.x    = Math.random() * cvs.width;
-        this.y    = Math.random() * -cvs.height;
+        this.x    = Math.random() * canvas.width;
+        this.y    = Math.random() * -canvas.height;
         this.r    = Math.random() * 5 + 3;
         this.sp   = Math.random() * 3 + 2;
         this.c    = `hsl(${Math.random() * 360},70%,60%)`;
         this.tilt = Math.random() * 10 - 10;
         this.ts   = Math.random() * .1 + .05;
       }
-      upd() {
+      update() {
         this.y += this.sp;
         this.x += Math.sin(this.y / 10);
         this.tilt += this.ts;
-        if (this.y > cvs.height) {
+        if (this.y > canvas.height) {
           this.y = -10;
-          this.x = Math.random() * cvs.width;
+          this.x = Math.random() * canvas.width;
         }
       }
       draw() {
@@ -530,20 +413,21 @@
         ctx.stroke();
       }
     }
-    let parts = [];
-    function startConf() {
-      parts = [];
-      for (let i = 0; i < 150; i++) parts.push(new P());
-      cvs.style.opacity = 1;
-      requestAnimationFrame(upd);
-      setTimeout(() => { cvs.style.opacity = 0; }, 3000);
+
+    let particles = [];
+    function startConfetti() {
+      particles = [];
+      for (let i = 0; i < 150; i++) particles.push(new Particle());
+      canvas.style.opacity = 1;
+      animateConfetti();
+      setTimeout(() => { canvas.style.opacity = 0; }, 3000);
     }
-    function upd() {
-      ctx.clearRect(0, 0, cvs.width, cvs.height);
-      parts.forEach(p => { p.upd(); p.draw(); });
-      if (cvs.style.opacity == "1") requestAnimationFrame(upd);
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      if (canvas.style.opacity == "1") requestAnimationFrame(animateConfetti);
     }
-    document.getElementById('ctaBtn').onclick = startConf;
+    document.getElementById('ctaBtn').onclick = startConfetti;
   </script>
 </body>
 </html>
