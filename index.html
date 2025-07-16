@@ -26,9 +26,8 @@
 
     /* DISCORD BAR & THEME TOGGLE */
     #discordBar { position:fixed; top:1rem; right:1rem; display:flex; gap:.5rem; align-items:center; z-index:50; }
-    #discordBar a, #discordBar button, #discordBar img { font-size:.9rem; }
+    #discordBar a, #discordBar button { font-size:.9rem; }
     #darkModeToggle { background:rgba(255,255,255,.1); border:none; padding:.5rem; border-radius:9999px; cursor:pointer; }
-    /* You can style login/logout button similarly */
 
     /* HEADER */
     header { position:sticky; top:0; backdrop-filter:blur(8px); background:rgba(31,41,55,.8);
@@ -268,8 +267,8 @@
     /* THEME TOGGLE */
     const dm=document.getElementById('darkModeToggle');
     dm.onclick=()=>{
-      document.body.classList.toggle('light'); localStorage.setItem('theme',
-        document.body.classList.contains('light')?'light':'dark');
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light')?'light':'dark');
     };
     if(localStorage.getItem('theme')==='light') document.body.classList.add('light');
 
