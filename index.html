@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Clarivex – Discord Bot</title>
 
-  <!-- Tailwind & AOS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <!-- Tailwind CSS & AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <style>
     /* GLOBAL TEXT COLOR */
-    body {
-      color: #ffffff;
-    }
+    body { color: #fff; background: #0f172a; }
+    a { transition: color .2s; }
+    a:hover { color: #8b5cf6; }
 
     /* LOADER */
     #loader {
       position: fixed; inset: 0;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
+      background: linear-gradient(135deg,#0f172a,#1e293b);
       color: #38bdf8; z-index: 9999; transition: opacity .5s;
     }
     .spinner {
-      width: 100px; height: 100px;
+      width: 80px; height: 80px;
       border: 8px solid rgba(56,189,248,.2);
       border-top-color: #38bdf8;
       border-radius: 50%;
@@ -35,15 +35,19 @@
 
     /* HEADER */
     header {
-      position: sticky; top: 0; backdrop-filter: blur(8px);
-      padding: 1.5rem 0; transition: all .4s ease;
+      position: fixed; top: 0; width: 100%;
       background: rgba(31,41,55,.8);
+      backdrop-filter: blur(8px);
+      z-index: 50;
+      transition: padding .3s;
+      padding: 1.5rem 0;
     }
     header.shrink { padding: .75rem 0; }
 
     /* NAV LINKS */
     .nav-link {
-      margin-left: 1.5rem; position: relative; padding-bottom: .25rem;
+      margin-left: 1.5rem;
+      position: relative; padding-bottom: .25rem;
       cursor: pointer; transition: color .3s;
     }
     .nav-link::after {
@@ -57,28 +61,27 @@
     /* COOKIE BANNER */
     #cookieBanner {
       position: fixed; bottom: 0; left: 0; right: 0;
-      background: rgba(31,41,55,.95); color: #f9fafb;
-      padding: .75rem 1rem; display: flex; justify-content: space-between;
+      background: rgba(31,41,55,.95); padding: .75rem 1rem;
+      color: #f9fafb; display: flex; justify-content: space-between;
       align-items: center; transform: translateY(100%);
-      transition: transform .5s; z-index: 10000;
+      transition: transform .5s; z-index: 100;
     }
     #cookieBanner.show { transform: translateY(0); }
     #cookieBanner button {
-      background: #8b5cf6; color: white; border: none;
+      background: #8b5cf6; color: #fff; border: none;
       padding: .5rem 1rem; border-radius: .5rem;
       cursor: pointer; transition: background .3s;
     }
     #cookieBanner button:hover { background: #7c3aed; }
 
-    /* HERO */
+    /* HERO GRADIENT & PARTICLES */
     .animated-gradient {
-      background: linear-gradient(-45deg, #4f46e5, #3b82f6, #06b6d4, #8b5cf6);
+      background: linear-gradient(-45deg,#4f46e5,#3b82f6,#06b6d4,#8b5cf6);
       background-size: 400% 400%; animation: gradientBG 15s ease infinite;
     }
     @keyframes gradientBG {
-      0%   { background-position: 0 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0 50%; }
+      0%,100% { background-position: 0 50%; }
+      50%     { background-position: 100% 50%; }
     }
     .particle {
       position: absolute; border-radius: 50%;
@@ -90,13 +93,14 @@
       50%     { transform: translate(var(--dx),var(--dy)); }
     }
 
+    /* TYPEWRITER */
     .typewriter .wrap {
       border-right: .15em solid currentColor;
       animation: caret .7s steps(1) infinite;
     }
     @keyframes caret { 50% { border-color: transparent; } }
 
-    /* CTA */
+    /* CTA BUTTON EFFECT */
     .cta-btn {
       position: relative; overflow: hidden;
       animation: pulseScale 4s ease-in-out infinite;
@@ -115,11 +119,11 @@
       50%     { transform: scale(1.05); }
     }
 
-    /* FEATURES */
+    /* FEATURE CARDS */
     .feature-card {
-      perspective: 1000px; transform-style: preserve-3d;
       background: rgba(55,65,81,.6); backdrop-filter: blur(12px);
       padding: 2rem; border-radius: 1.25rem;
+      perspective: 1000px; transform-style: preserve-3d;
       transition: transform .4s, box-shadow .4s;
       cursor: pointer;
     }
@@ -135,6 +139,7 @@
       position: fixed; inset: 0; background: rgba(0,0,0,.7);
       display: flex; align-items: center; justify-content: center;
       opacity: 0; pointer-events: none; transition: opacity .3s;
+      z-index: 100;
     }
     #modal.show { opacity: 1; pointer-events: auto; }
     #modal .content {
@@ -148,19 +153,19 @@
       cursor: pointer;
     }
 
-    /* CONFETTI CANVAS */
+    /* CONFETTI */
     #confettiCanvas {
       position: fixed; inset: 0; pointer-events: none;
-      opacity: 0; transition: opacity .5s;
+      opacity: 0; transition: opacity .5s; z-index: 10;
     }
 
     /* BACK TO TOP */
     #backToTop {
       position: fixed; bottom: 1.5rem; right: 1.5rem;
-      background: #8b5cf6; color: white; border: none;
+      background: #8b5cf6; color: #fff; border: none;
       padding: .75rem; border-radius: 9999px;
       cursor: pointer; opacity: 0; pointer-events: none;
-      transition: opacity .3s;
+      transition: opacity .3s; z-index: 50;
     }
     #backToTop.show { opacity: 1; pointer-events: auto; }
   </style>
@@ -179,113 +184,192 @@
     <button id="acceptCookies">Accept</button>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div id="content" class="opacity-0 transition-opacity duration-500 mt-12">
+  <!-- PAGE WRAPPER -->
+  <div id="content" class="opacity-0 transition-opacity duration-500">
 
-    <!-- HEADER -->
+    <!-- HEADER / NAV -->
     <header id="header">
-      <div class="container mx-auto flex items-center justify-between px-6 max-w-6xl">
-        <h1 class="text-3xl font-extrabold select-none">Clarivex</h1>
+      <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <a href="#" class="text-2xl font-bold select-none">Clarivex</a>
         <nav class="hidden md:flex">
-          <a class="nav-link active" data-target="hero">Home</a>
-          <a class="nav-link" href="https://clarivex-pricing2.vercel.app/">Pricing</a>
-          <a class="nav-link" href="tos.html">Terms</a>
-          <a class="nav-link" href="privacy.html">Privacy</a>
-          <a class="nav-link" href="support.html">Support</a>
+          <a href="#hero" class="nav-link active">Home</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#tutorial" class="nav-link">Tutorial</a>
+          <a href="#pricing" class="nav-link">Pricing</a>
+          <a href="#reviews" class="nav-link">Reviews</a>
         </nav>
-        <button id="hamburger" class="md:hidden flex flex-col gap-1">
-          <span class="block w-6 h-1 bg-indigo-400"></span>
-          <span class="block w-6 h-1 bg-indigo-400"></span>
-          <span class="block w-6 h-1 bg-indigo-400"></span>
-        </button>
+        <button id="hamburger" class="md:hidden text-2xl">☰</button>
       </div>
-      <nav id="mobileNav" class="hidden flex-col bg-gray-800 text-indigo-400 p-6 space-y-4">
-        <a class="nav-link" data-target="hero">Home</a>
-        <a class="nav-link" href="pricing.html">Pricing</a>
-        <a class="nav-link" href="tos.html">Terms</a>
-        <a class="nav-link" href="privacy.html">Privacy</a>
-        <a class="nav-link" href="support.html">Support</a>
+      <nav id="mobileNav" class="hidden bg-gray-800 text-indigo-400 flex-col p-6 space-y-4">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#tutorial" class="nav-link">Tutorial</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#reviews" class="nav-link">Reviews</a>
       </nav>
     </header>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="animated-gradient relative text-center py-32 overflow-hidden">
-      <div class="particle w-8 h-8" style="--dx:20px;--dy:-30px;left:15%;top:25%;"></div>
-      <div class="particle w-6 h-6" style="--dx:-15px;--dy:25px;left:75%;top:35%;animation-delay:2s;"></div>
-      <div class="particle w-10 h-10" style="--dx:30px;--dy:40px;left:50%;top:15%;animation-delay:4s;"></div>
+    <!-- HERO -->
+    <section id="hero" class="animated-gradient relative text-center pt-24 pb-32 overflow-hidden">
+      <!-- Particles -->
+      <div class="particle w-8 h-8" style="--dx:20px;--dy:-30px;left:10%;top:30%;"></div>
+      <div class="particle w-6 h-6" style="--dx:-15px;--dy:25px;left:80%;top:40%;animation-delay:2s;"></div>
+      <div class="particle w-10 h-10" style="--dx:30px;--dy:40px;left:50%;top:20%;animation-delay:4s;"></div>
 
-      <div class="relative z-10 max-w-3xl mx-auto px-6">
-        <h2 class="typewriter text-5xl sm:text-6xl font-extrabold mb-6"><span class="wrap"></span></h2>
-        <p class="text-xl sm:text-2xl text-indigo-300 mb-12">
-          The ultimate Discord bot for server management, advanced tools & premium features.
+      <div class="max-w-3xl mx-auto px-6" data-aos="fade-up">
+        <h1 class="text-5xl sm:text-6xl font-extrabold mb-4">The ultimate Discord bot for community management.</h1>
+        <p class="text-xl text-indigo-300 mb-8">
+          Automate moderation, progression & analytics — all in one place.
         </p>
-        <a
-          id="joinBtn"
-          href="https://discord.gg/KSnKbWxyqx"
-          target="_blank"
-          class="cta-btn bg-white text-gray-900 font-bold py-3 px-6 rounded-full shadow-lg inline-block relative"
-        >
-          Join Discord
-        </a>
+        <div class="space-x-4">
+          <a href="#pricing" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg cta-btn">Subscribe from $5/mo</a>
+          <a href="#features" class="inline-block border border-indigo-400 text-indigo-400 font-bold py-3 px-8 rounded-lg cta-btn">Learn More</a>
+        </div>
+      </div>
+
+      <!-- Hero Image Placeholder -->
+      <img src="https://via.placeholder.com/800x400" alt="Hero Illustration"
+           class="mt-12 mx-auto w-4/5 max-w-4xl" data-aos="fade-up" data-aos-delay="200">
+    </section>
+
+    <!-- FEATURES GRID -->
+    <section id="features" class="py-20 bg-gray-800">
+      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+        <div class="feature-card" data-aos="fade-up">
+          <h3 class="text-2xl font-semibold mb-2">Advanced Moderation</h3>
+          <p>Smart commands, auto‑moderation & full logs.</p>
+          <button class="learn-btn mt-4">Learn More</button>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-2xl font-semibold mb-2">XP & Levelling</h3>
+          <p>Reward active members with XP, ranks & leaderboards.</p>
+          <button class="learn-btn mt-4">Learn More</button>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-2xl font-semibold mb-2">Analytics Dashboard</h3>
+          <p>Track member activity, engagement metrics, and growth.</p>
+          <button class="learn-btn mt-4">Learn More</button>
+        </div>
       </div>
     </section>
 
-    <!-- FEATURES SECTION -->
-    <section class="bg-gray-800 py-20">
-      <div class="container mx-auto grid md:grid-cols-3 gap-10 px-6 max-w-6xl">
-        <div class="feature-card" data-feature="Advanced Moderation" data-aos="fade-up">
-          <h3 class="text-2xl font-semibold mb-4">Advanced Moderation</h3>
-          <p>Smart commands, auto-moderation & full logs.</p>
-          <button class="learn-btn">Learn More</button>
-        </div>
-        <div class="feature-card" data-feature="XP & Levels" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-2xl font-semibold mb-4">XP & Levels</h3>
-          <p>Engage your community with XP, ranks & leaderboards.</p>
-          <button class="learn-btn">Learn More</button>
-        </div>
-        <div class="feature-card" data-feature="Premium Unlocks" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-2xl font-semibold mb-4">Premium Unlocks</h3>
-          <p>Exclusive tools via redeemable keys.</p>
-          <button class="learn-btn">Learn More</button>
+    <!-- TUTORIAL VIDEO -->
+    <section id="tutorial" class="py-20">
+      <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+        <h2 class="text-3xl font-bold mb-6">Setup Tutorial</h2>
+        <div class="relative pb-56.25%">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen
+                  class="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"></iframe>
         </div>
       </div>
     </section>
 
-    <!-- MODAL -->
-    <div id="modal" aria-hidden="true">
-      <div class="content">
-        <button id="modalClose">×</button>
-        <h3 id="modalTitle" class="text-2xl font-bold mb-4"></h3>
-        <p id="modalBody"></p>
+    <!-- ON‑DEMAND FEATURES -->
+    <section class="py-20 bg-gray-800">
+      <div class="max-w-6xl mx-auto px-6 text-center" data-aos="fade-up">
+        <h2 class="text-3xl font-bold mb-8">Features on Demand</h2>
+        <ul class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <li>Experience Tracking</li>
+          <li>Quota Tracking</li>
+          <li>Blacklist Management</li>
+          <li>Medals & Awards</li>
+          <li>Qualifications</li>
+          <li>Warnings</li>
+          <li>Server Analytics</li>
+          <li>API Access</li>
+        </ul>
       </div>
-    </div>
+    </section>
 
-    <!-- CALL TO ACTION -->
+    <!-- COMPARISON -->
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto px-6 space-y-12" data-aos="fade-up">
+        <h2 class="text-3xl font-bold text-center mb-8">Why Choose Clarivex?</h2>
+        <div class="space-y-8">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+            <h3 class="font-semibold md:w-1/3">6+ Years Uptime</h3>
+            <div class="md:w-2/3 grid grid-cols-2 text-center gap-4">
+              <div class="p-4 bg-gray-700 rounded">Other Bots<br><span class="text-sm">May go offline</span></div>
+              <div class="p-4 bg-indigo-600 rounded">Clarivex<br><span class="text-sm">Rock‑solid reliability</span></div>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+            <h3 class="font-semibold md:w-1/3">All Features Free</h3>
+            <div class="md:w-2/3 grid grid-cols-2 text-center gap-4">
+              <div class="p-4 bg-gray-700 rounded">Pay‑per‑feature<br><span class="text-sm">Extra fees</span></div>
+              <div class="p-4 bg-indigo-600 rounded">Clarivex<br><span class="text-sm">$5/mo unlimited</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-20 bg-gray-800">
+      <div class="max-w-6xl mx-auto px-6 text-center" data-aos="fade-up">
+        <h2 class="text-3xl font-bold mb-8">Pricing Plans</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-gray-700 p-8 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">1 Month</h3>
+            <p class="text-4xl font-bold mb-4">$5</p>
+            <a href="#" class="inline-block bg-indigo-600 hover:bg-indigo-700 py-2 px-6 rounded">Subscribe</a>
+          </div>
+          <div class="bg-gray-700 p-8 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">3 Months</h3>
+            <p class="text-4xl font-bold mb-4">$13</p>
+            <a href="#" class="inline-block bg-indigo-600 hover:bg-indigo-700 py-2 px-6 rounded">Save $2</a>
+          </div>
+          <div class="bg-gray-700 p-8 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">6 Months</h3>
+            <p class="text-4xl font-bold mb-4">$25</p>
+            <a href="#" class="inline-block bg-indigo-600 hover:bg-indigo-700 py-2 px-6 rounded">Save $5</a>
+          </div>
+          <div class="bg-gray-700 p-8 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">1 Year</h3>
+            <p class="text-4xl font-bold mb-4">$48</p>
+            <a href="#" class="inline-block bg-indigo-600 hover:bg-indigo-700 py-2 px-6 rounded">Save $12</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="reviews" class="py-20">
+      <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+        <h2 class="text-3xl font-bold mb-8">What Our Clients Say</h2>
+        <blockquote class="bg-gray-800 p-8 rounded-lg italic text-lg">
+          “Clarivex has saved us countless hours on moderation & progression—highly recommended!”<br>
+          <span class="block mt-4 font-semibold">— Gaming Community Admin</span>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- CTA -->
     <section class="text-center py-16 px-6">
-      <a
-        id="ctaBtn"
-        href="https://discord.com/oauth2/authorize?client_id=1370487453562962101"
-        target="_blank"
-        class="cta-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg"
-      >
+      <a id="ctaBtn" href="https://discord.com/oauth2/authorize?client_id=1370487453562962101"
+         class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg cta-btn">
         Get Started Now
       </a>
     </section>
 
-    <canvas id="confettiCanvas"></canvas>
-
     <!-- FOOTER -->
-    <footer class="bg-gray-900 text-indigo-400 py-6 border-t border-gray-700 text-center">
-      <a href="tos.html" class="hover:text-indigo-300">Terms of Service</a> |
-      <a href="privacy.html" class="hover:text-indigo-300">Privacy Policy</a> |
-      <a href="support.html" class="hover:text-indigo-300">Support</a>
-      <p class="mt-4">&copy; 2025 Clarivex. All rights reserved.</p>
+    <footer class="bg-gray-900 py-8 text-center text-gray-400 text-sm">
+      <div class="max-w-6xl mx-auto px-6 space-y-4">
+        <div class="space-x-4">
+          <a href="tos.html">Terms of Service</a> |
+          <a href="privacy.html">Privacy Policy</a> |
+          <a href="support.html">Support</a>
+        </div>
+        <p>© 2025 Clarivex. All rights reserved.</p>
+      </div>
     </footer>
 
-    <!-- BACK TO TOP BUTTON -->
+    <!-- BACK TO TOP -->
     <button id="backToTop" title="Back to top">↑</button>
-  </div>
 
+  </div><!-- /#content -->
+
+  <!-- AOS & SCRIPTS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ once: true, duration: 800, easing: 'ease-in-out' });
@@ -293,141 +377,110 @@
     /* LOADER */
     let pct = 0;
     const prog = document.getElementById('progress');
-    const loaderInterval = setInterval(() => {
+    const loader = document.getElementById('loader');
+    const content = document.getElementById('content');
+    const li = setInterval(() => {
       pct += 5;
       prog.textContent = pct + '%';
       if (pct >= 100) {
-        clearInterval(loaderInterval);
-        document.getElementById('loader').style.opacity = 0;
+        clearInterval(li);
+        loader.style.opacity = 0;
         setTimeout(() => {
-          document.getElementById('loader').style.display = 'none';
-          document.getElementById('content').style.opacity = 1;
+          loader.style.display = 'none';
+          content.style.opacity = 1;
         }, 500);
       }
     }, 50);
 
     /* COOKIE BANNER */
-    const cookieBanner = document.getElementById('cookieBanner');
-    const acceptBtn = document.getElementById('acceptCookies');
+    const cb = document.getElementById('cookieBanner'),
+          ac = document.getElementById('acceptCookies');
     if (!localStorage.getItem('cookiesAccepted')) {
-      setTimeout(() => cookieBanner.classList.add('show'), 800);
+      setTimeout(() => cb.classList.add('show'), 800);
     }
-    acceptBtn.onclick = () => {
-      localStorage.setItem('cookiesAccepted', 'yes');
-      cookieBanner.classList.remove('show');
+    ac.onclick = () => {
+      localStorage.setItem('cookiesAccepted','yes');
+      cb.classList.remove('show');
     };
 
     /* HEADER SHRINK & BACK TO TOP */
-    const header = document.getElementById('header');
-    const backToTop = document.getElementById('backToTop');
+    const hdr = document.getElementById('header'),
+          topBtn = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-      window.scrollY > 30  ? header.classList.add('shrink') : header.classList.remove('shrink');
-      window.scrollY > 300 ? backToTop.classList.add('show') : backToTop.classList.remove('show');
+      window.scrollY > 30  ? hdr.classList.add('shrink')   : hdr.classList.remove('shrink');
+      window.scrollY > 300 ? topBtn.classList.add('show') : topBtn.classList.remove('show');
     });
-    backToTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    /* MOBILE NAVIGATION */
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    hamburger.onclick = () => {
-      mobileNav.classList.toggle('hidden');
-      hamburger.classList.toggle('open');
-    };
+    /* MOBILE NAV */
+    const ham = document.getElementById('hamburger'),
+          mob = document.getElementById('mobileNav');
+    ham.onclick = () => mob.classList.toggle('hidden');
 
-    /* TYPEWRITER EFFECT */
-    (function() {
-      const words = ["Advanced Moderation.","XP & Leveling.","Premium Unlocks.","Powerful & Easy."];
-      const wrap  = document.querySelector('.wrap');
-      let wi = 0, ci = 0, deleting = false;
-      (function type() {
-        const current = words[wi];
-        if (!deleting) {
-          wrap.textContent = current.substr(0, ++ci);
-          if (ci === current.length) { deleting = true; return setTimeout(type, 1500); }
+    /* TYPEWRITER */
+    (function(){
+      const words=["Advanced Moderation.","XP & Levelling.","Premium Unlocks.","Powerful & Easy."],
+            wrap=document.querySelector('.wrap');
+      let wi=0,ci=0,del=false;
+      (function t(){
+        const full=words[wi];
+        if(!del){
+          wrap.textContent = full.substr(0,++ci);
+          if(ci===full.length){del=true;return setTimeout(t,1500);}
         } else {
-          wrap.textContent = current.substr(0, --ci);
-          if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+          wrap.textContent = full.substr(0,--ci);
+          if(ci===0){del=false; wi=(wi+1)%words.length;}
         }
-        setTimeout(type, deleting ? 50 : 120);
+        setTimeout(t, del?50:120);
       })();
     })();
 
     /* MODAL DETAILS */
     const details = {
-      "Advanced Moderation": "Smart commands, filters & logs.",
-      "XP & Levels":        "Experience, ranks & leaderboards.",
-      "Premium Unlocks":    "Redeem keys for exclusive commands."
+      "Advanced Moderation":"Smart commands, filters & logs.",
+      "XP & Levelling":"Experience, ranks & leaderboards.",
+      "Analytics Dashboard":"Track member activity & engagement."
     };
-    document.querySelectorAll('.learn-btn').forEach(btn => {
-      btn.onclick = e => {
-        const feature = e.target.closest('.feature-card').dataset.feature;
-        document.getElementById('modalTitle').textContent = feature;
-        document.getElementById('modalBody').textContent = details[feature];
+    document.querySelectorAll('.learn-btn').forEach(b=>{
+      b.onclick = e => {
+        const f = e.target.closest('.feature-card').querySelector('h3').textContent;
+        document.getElementById('modalTitle').textContent = f;
+        document.getElementById('modalBody').textContent = details[f] || '';
         document.getElementById('modal').classList.add('show');
       };
     });
-    document.getElementById('modalClose').onclick = () => {
-      document.getElementById('modal').classList.remove('show');
-    };
-    document.getElementById('modal').onclick = e => {
-      if (e.target === document.getElementById('modal')) {
-        document.getElementById('modal').classList.remove('show');
-      }
+    document.getElementById('modalClose').onclick = ()=>document.getElementById('modal').classList.remove('show');
+    document.getElementById('modal').onclick = e=>{
+      if(e.target===document.getElementById('modal')) document.getElementById('modal').classList.remove('show');
     };
 
-    /* CONFETTI EFFECT */
-    const canvas = document.getElementById('confettiCanvas');
-    const ctx = canvas.getContext('2d');
-    function resizeCanvas() {
-      canvas.width  = innerWidth;
-      canvas.height = innerHeight;
+    /* CONFETTI */
+    const cvs = document.getElementById('confettiCanvas'), ctx = cvs.getContext('2d');
+    function resize(){ cvs.width=innerWidth; cvs.height=innerHeight; }
+    window.onresize = resize; resize();
+    class P{ constructor(){
+        this.x=Math.random()*cvs.width; this.y=Math.random()*-cvs.height;
+        this.r=Math.random()*5+3; this.sp=Math.random()*3+2;
+        this.c=`hsl(${Math.random()*360},70%,60%)`;
+        this.tilt=Math.random()*10-10; this.ts=Math.random()*.1+.05;
+      }
+      upd(){ this.y+=this.sp; this.x+=Math.sin(this.y/10); this.tilt+=this.ts;
+        if(this.y>cvs.height){ this.y=-10; this.x=Math.random()*cvs.width; }
+      }
+      draw(){ ctx.beginPath(); ctx.lineWidth=this.r/2; ctx.strokeStyle=this.c;
+        ctx.moveTo(this.x+this.tilt+this.r/2,this.y);
+        ctx.lineTo(this.x+this.tilt,this.y+this.tilt+this.r/2); ctx.stroke();
+      }
     }
-    window.onresize = resizeCanvas;
-    resizeCanvas();
+    let parts=[];
+    function startConf(){ parts=[]; for(let i=0;i<150;i++) parts.push(new P());
+      cvs.style.opacity=1; upd(); setTimeout(()=>cvs.style.opacity=0,3000);
+    }
+    function upd(){ ctx.clearRect(0,0,cvs.width,cvs.height);
+      parts.forEach(p=>{p.upd();p.draw();}); if(cvs.style.opacity=="1") requestAnimationFrame(upd);
+    }
+    document.getElementById('ctaBtn').onclick = startConf;
 
-    class Particle {
-      constructor() {
-        this.x    = Math.random() * canvas.width;
-        this.y    = Math.random() * -canvas.height;
-        this.r    = Math.random() * 5 + 3;
-        this.sp   = Math.random() * 3 + 2;
-        this.c    = `hsl(${Math.random() * 360},70%,60%)`;
-        this.tilt = Math.random() * 10 - 10;
-        this.ts   = Math.random() * .1 + .05;
-      }
-      update() {
-        this.y += this.sp;
-        this.x += Math.sin(this.y / 10);
-        this.tilt += this.ts;
-        if (this.y > canvas.height) {
-          this.y = -10;
-          this.x = Math.random() * canvas.width;
-        }
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.lineWidth = this.r / 2;
-        ctx.strokeStyle = this.c;
-        ctx.moveTo(this.x + this.tilt + this.r / 2, this.y);
-        ctx.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 2);
-        ctx.stroke();
-      }
-    }
-
-    let particles = [];
-    function startConfetti() {
-      particles = [];
-      for (let i = 0; i < 150; i++) particles.push(new Particle());
-      canvas.style.opacity = 1;
-      animateConfetti();
-      setTimeout(() => { canvas.style.opacity = 0; }, 3000);
-    }
-    function animateConfetti() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      if (canvas.style.opacity == "1") requestAnimationFrame(animateConfetti);
-    }
-    document.getElementById('ctaBtn').onclick = startConfetti;
   </script>
 </body>
 </html>
