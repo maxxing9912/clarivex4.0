@@ -148,69 +148,320 @@
         </a>
       </div>
 
-      <!-- IPHONE MOCKUP -->
-      <div class="phone-mockup" data-aos="fade-left" data-aos-delay="200">
-        <div class="phone-screen">
-          <img src="your-image.jpg" alt="App Preview">
-        </div>
-      </div>
+   <!-- iPhone Mockup -->
+<div class="phone-mockup">
+  <div class="phone-screen">
+    <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395025757264150669/image_2.png?ex=6878f27a&is=6877a0fa&hm=20f9a7928dcb6b3b8e9c542156bb118723c51f0ea28fa8ef107d0fb25d65b8bc&"
+         alt="Screenshot"
+         class="phone-image">
+  </div>
+</div>
+
+<style>
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .phone-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+</style>
     </section>
-    <!-- Why Choose Clan Labs -->
-<section id="why" class="bg-gray-900 text-white py-20">
-  <div class="max-w-6xl mx-auto px-6 text-center mb-12">
-    <h2 data-aos="fade-up" class="text-3xl font-extrabold">
-      Why choose <span class="text-indigo-400">Clan Labs</span>?
+    <!-- Why Choose Clarivex — Award‑Worthy Edition -->
+<section id="why" class="bg-gray-900 text-white py-24 relative overflow-hidden">
+  <!-- Lottie background animation (optional) -->
+  <lottie-player
+    src="https://assets2.lottiefiles.com/packages/lf20_tUtOZB.json"
+    background="transparent"
+    speed="0.8"
+    style="position:absolute; top:-20%; left:-10%; width:120%; height:120%; opacity:0.15;"
+    loop
+    autoplay
+  ></lottie-player>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center mb-16">
+    <h2
+      class="text-5xl md:text-6xl font-extrabold mb-4"
+      data-aos="fade-down"
+      data-aos-duration="1200"
+    >
+      Why choose <span class="text-gradient bg-clip-text text-transparent bg-indigo-400">Clarivex</span>?
     </h2>
-    <p class="text-indigo-300 mt-2" data-aos="fade-up" data-aos-delay="100">
-      A proven, useful group management tool—modular, sicuro, e sempre al tuo fianco.
+    <p
+      class="text-xl text-indigo-300"
+      data-aos="fade-up"
+      data-aos-duration="1200"
+      data-aos-delay="300"
+    >
+      Your all‑in‑one, award‑winning Discord toolkit: management, scaling & security redefined.
     </p>
   </div>
 
-  <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-8 px-6">
-    <!-- Card esistente 1 -->
-    <div class="card text-center" data-aos="fade-up">
-      <div class="icon-circle mx-auto"><!-- icona --></div>
-      <h4 class="subheading">Advanced Group Management</h4>
-      <p>Sync ruoli e permessi, manipola le impostazioni via chat, integra XP, blacklist e altro.</p>
+  <div class="relative z-10 max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6">
+    <!-- Card 1: Advanced Management -->
+    <div
+      class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
+      data-aos="zoom-in"
+      data-aos-duration="800"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-indigo-400 group-hover:scale-110 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h8m-8 4h6"/>
+      </svg>
+      <h4 class="text-2xl font-semibold mb-2">Advanced Management</h4>
+      <p class="text-sm text-indigo-200 mb-4">Slash‑commands per sync ruoli, permessi e canali in un lampo.</p>
+      <span class="text-indigo-300 text-lg font-bold counter" data-target="70">0</span>
+      <p class="text-xs text-indigo-400 mt-1">Commands</p>
     </div>
 
-    <!-- Card esistente 2 -->
-    <div class="card text-center" data-aos="fade-up" data-aos-delay="100">
-      <div class="icon-circle mx-auto"><!-- icona --></div>
-      <h4 class="subheading">Real‑time API & DB</h4>
-      <p>REST endpoints per gestire esperienza, inventario e eventi dinamici.</p>
+    <!-- Card 2: Real‑Time API -->
+    <div
+      class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
+      data-aos="zoom-in"
+      data-aos-duration="800"
+      data-aos-delay="100"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-green-400 group-hover:rotate-6 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18"/>
+      </svg>
+      <h4 class="text-2xl font-semibold mb-2">Real‑Time API</h4>
+      <p class="text-sm text-indigo-200 mb-4">REST endpoints per XP, inventario & eventi live.</p>
+      <span class="text-green-300 text-lg font-bold counter" data-target="24">0</span>
+      <p class="text-xs text-green-200 mt-1">Endpoints</p>
     </div>
 
-    <!-- Card esistente 3 -->
-    <div class="card text-center" data-aos="fade-up" data-aos-delay="200">
-      <div class="icon-circle mx-auto"><!-- icona --></div>
-      <h4 class="subheading">Dedicated Support</h4>
-      <p>Live chat 24/7, forum e sviluppatori pronti a intervenire.</p>
+    <!-- Card 3: 24/7 Support -->
+    <div
+      class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
+      data-aos="zoom-in"
+      data-aos-duration="800"
+      data-aos-delay="200"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-yellow-400 group-hover:translate-y-1 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8a6 6 0 01-12 0"/>
+      </svg>
+      <h4 class="text-2xl font-semibold mb-2">24/7 Support</h4>
+      <p class="text-sm text-indigo-200 mb-4">Live chat, ticket system & dev‑on‑call.</p>
+      <span class="text-yellow-300 text-lg font-bold counter" data-target="7">0</span>
+      <p class="text-xs text-yellow-200 mt-1">Days a Week</p>
     </div>
 
-    <!-- NUOVA Card 4 -->
-    <div class="card text-center" data-aos="fade-up" data-aos-delay="300">
-      <div class="icon-circle mx-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 12H9v-2h2v2zm0-4H9V6h2v4z"/>
-        </svg>
-      </div>
-      <h4 class="subheading">A proven, useful group tool</h4>
-      <p>Gestisci ogni aspetto del server con comandi rapidi e console integrata.</p>
-    </div>
-
-    <!-- NUOVA Card 5 -->
-    <div class="card text-center" data-aos="fade-up" data-aos-delay="400">
-      <div class="icon-circle mx-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4l-4 4V5z"/>
-        </svg>
-      </div>
-      <h4 class="subheading">Customer Support</h4>
-      <p>Live chat e ticket 24/7: staff ed esperti pronti a intervenire, con sviluppatori sempre disponibili.</p>
+    <!-- Card 4: Customer Care -->
+    <div
+      class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
+      data-aos="zoom-in"
+      data-aos-duration="800"
+      data-aos-delay="300"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-pink-400 group-hover:opacity-80 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6"/>
+      </svg>
+      <h4 class="text-2xl font-semibold mb-2">Customer Care</h4>
+      <p class="text-sm text-indigo-200 mb-4">Community guides & dedicated experts.</p>
+      <span class="text-pink-300 text-lg font-bold counter" data-target="99">0</span>
+      <p class="text-xs text-pink-200 mt-1">Satisfaction %</p>
     </div>
   </div>
 </section>
+
+<script>
+// Simple on‑scroll counter animation
+document.addEventListener('DOMContentLoaded', () => {
+  const counters = document.querySelectorAll('.counter');
+  const options = { threshold: 0.5 };
+  const cb = entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = +el.dataset.target;
+        let count = 0;
+        const step = Math.ceil(target / 50);
+        const interval = setInterval(() => {
+          count += step;
+          if (count >= target) {
+            el.textContent = target;
+            clearInterval(interval);
+          } else {
+            el.textContent = count;
+          }
+        }, 20);
+        observer.unobserve(el);
+      }
+    });
+  };
+  const observer = new IntersectionObserver(cb, options);
+  counters.forEach(c => observer.observe(c));
+});
+</script>
+</section>
+
+<script>
+  // Data for each feature slide
+  const features = [
+    {
+      title: 'Blacklist',
+      desc:  'Keep unwanted users out with ease.',
+      img:   'blacklist.jpg'
+    },
+    {
+      title: 'Medals',
+      desc:  'Reward top contributors with custom medals.',
+      img:   'medals.jpg'
+    },
+    {
+      title: 'Profile',
+      desc:  'Personalized member profiles and stats.',
+      img:   'profile.jpg'
+    },
+    {
+      title: 'Warnings',
+      desc:  'Issue, track and appeal warnings seamlessly.',
+      img:   'warnings.jpg'
+    },
+    {
+      title: 'AntiRaid',
+      desc:  'Protect your server from raids automatically.',
+      img:   'antiraid.jpg'
+    }
+  ];
+
+  let current = 0;
+  const titleEl = document.getElementById('feature-title');
+  const descEl  = document.getElementById('feature-desc');
+  const imgEl   = document.getElementById('feature-image');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  function showFeature(idx) {
+    const { title, desc, img } = features[idx];
+    // simple fade transition
+    titleEl.parentElement.classList.add('opacity-0');
+    setTimeout(() => {
+      titleEl.textContent = title;
+      descEl.textContent  = desc;
+      imgEl.src           = img;
+      titleEl.parentElement.classList.remove('opacity-0');
+    }, 200);
+  }
+
+  prevBtn.onclick = () => {
+    current = (current - 1 + features.length) % features.length;
+    showFeature(current);
+  };
+  nextBtn.onclick = () => {
+    current = (current + 1) % features.length;
+    showFeature(current);
+  };
+
+  // Optional: support left/right arrow keys
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') prevBtn.click();
+    if (e.key === 'ArrowRight') nextBtn.click();
+  });
+
+  // Initialize first slide
+  showFeature(0);
+</script>
+<!-- Swiper CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+/>
+<!-- Swiper JS (at bottom of <body>) -->
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<!-- Features on Demand — Swiper Carousel -->
+<section id="features-on-demand" class="bg-gray-800 text-white py-20">
+  <div class="max-w-4xl mx-auto px-6 text-center mb-12">
+    <h2
+      class="text-4xl font-extrabold mb-4"
+      data-aos="fade-down" data-aos-duration="1000"
+    >
+      Features on Demand
+    </h2>
+    <p
+      class="text-lg text-indigo-300"
+      data-aos="fade-up" data-aos-duration="1000"
+      data-aos-delay="200"
+    >
+      Free weekly updates & tools to modernize, organize, and elevate your clan’s ecosystem.
+    </p>
+  </div>
+
+  <div class="relative max-w-sm mx-auto">
+    <!-- iPhone frame -->
+    <div class="iphone-mockup mx-auto mb-6">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!-- Slide 1: Blacklist -->
+          <div class="swiper-slide flex flex-col items-center">
+            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395027254375092325/image.png?ex=6878f3df&is=6877a25f&hm=1ad8f3ecf7721af86e36167877aae1c765aeb6f47bcc8b0a50a68c9e97e55200&" alt="Blacklist" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+            <h3 class="mt-4 text-2xl font-semibold">Blacklist</h3>
+            <p class="mt-2 text-indigo-300 text-center">Keep unwanted users out automatically.</p>
+          </div>
+          <!-- Slide 2: Medals -->
+          <div class="swiper-slide flex flex-col items-center">
+            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395124196979507390/image.png?ex=68794e28&is=6877fca8&hm=96b27221ace8bc6b7f5eb2e9c48cd2005e3e4f386ff941d7584d3c73e918b7cb&" alt="Medals" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+            <h3 class="mt-4 text-2xl font-semibold">Medals</h3>
+            <p class="mt-2 text-indigo-300 text-center">Reward top contributors with custom badges.</p>
+          </div>
+          <!-- Slide 3: Profile -->
+          <div class="swiper-slide flex flex-col items-center">
+            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395026426822131732/image.png?ex=6878f31a&is=6877a19a&hm=a91cbefa578df18d3f590da73806ec2726d9af813bb07b65612f0e6ea6d19315&" alt="Profile" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+            <h3 class="mt-4 text-2xl font-semibold">Profile</h3>
+            <p class="mt-2 text-indigo-300 text-center">Dynamic member profiles & stats.</p>
+          </div>
+          <!-- Slide 4: Warnings -->
+          <div class="swiper-slide flex flex-col items-center">
+            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395127780382867557/Immagine_2025-07-16_213915.png?ex=6879517f&is=6877ffff&hm=0637ba56cab454ce3c09555bbd9f1e8781f38f5097f1eba3ae89afdf62036653&" alt="Warnings" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+            <h3 class="mt-4 text-2xl font-semibold">Warnings</h3>
+            <p class="mt-2 text-indigo-300 text-center">Issue, track, and appeal warnings seamlessly.</p>
+          </div>
+          <!-- Slide 5: AntiRaid -->
+          <div class="swiper-slide flex flex-col items-center">
+            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395129419957272646/image.png?ex=68795305&is=68780185&hm=9afdf7c14246f34108b26ce1bdea61333097895add74f44b2bd3cc41477ec902&" alt="AntiRaid" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+            <h3 class="mt-4 text-2xl font-semibold">AntiRaid</h3>
+            <p class="mt-2 text-indigo-300 text-center">Auto‑detect & block raids in seconds.</p>
+          </div>
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="swiper-button-prev text-indigo-400 hover:text-white"></div>
+        <div class="swiper-button-next text-indigo-400 hover:text-white"></div>
+        <!-- Pagination dots -->
+        <div class="swiper-pagination mt-4"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const swiper = new Swiper('.swiper-container', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 20,
+        depth: 200,
+        slideShadows: false,
+      },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      autoplay: { delay: 5000, disableOnInteraction: false },
+    });
+    AOS.refresh();
+  });
+</script>
 
     <!-- PRICING / THEM VS US SECTION -->
     <section id="difference" class="bg-gray-800 py-16">
