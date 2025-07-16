@@ -10,63 +10,78 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <style>
+    /* GLOBAL TEXT COLOR */
     body { color: #ffffff; }
 
     /* LOADER */
-    #loader { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f172a, #1e293b); color: #38bdf8; z-index: 9999; transition: opacity .5s; }
-    .spinner { width: 100px; height: 100px; border: 8px solid rgba(56,189,248,.2); border-top-color: #38bdf8; border-radius: 50%; animation: spin 1s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    #progress { margin-top: .5rem; font: 1.2rem monospace; }
+    #loader { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg,#0f172a,#1e293b); color:#38bdf8; z-index:9999; transition:opacity .5s; }
+    .spinner { width:100px;height:100px;border:8px solid rgba(56,189,248,.2);border-top-color:#38bdf8;border-radius:50%;animation:spin 1s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    #progress { margin-top:.5rem;font:1.2rem monospace; }
 
     /* HEADER */
-    header { position: sticky; top: 0; backdrop-filter: blur(8px); padding: 1.5rem 0; background: rgba(31,41,55,.8); transition: padding .4s; }
-    header.shrink { padding: .75rem 0; }
+    header { position:sticky; top:0; backdrop-filter:blur(8px); padding:1.5rem 0; transition:all .4s ease; background:rgba(31,41,55,.8); }
+    header.shrink { padding:.75rem 0; }
 
     /* NAV LINKS */
-    .nav-link { margin-left: 1.5rem; position: relative; padding-bottom: .25rem; cursor: pointer; transition: color .3s; }
-    .nav-link::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: currentColor; transition: width .3s; }
-    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link { margin-left:1.5rem; position:relative; padding-bottom:.25rem; cursor:pointer; transition:color .3s; }
+    .nav-link::after { content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:currentColor; transition:width .3s; }
+    .nav-link:hover::after, .nav-link.active::after { width:100%; }
 
     /* COOKIE BANNER */
-    #cookieBanner { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(31,41,55,.95); color: #f9fafb; padding: .75rem 1rem; display: flex; justify-content: space-between; align-items: center; transform: translateY(100%); transition: transform .5s; z-index: 10000; }
-    #cookieBanner.show { transform: translateY(0); }
-    #cookieBanner button { background: #8b5cf6; color: white; border: none; padding: .5rem 1rem; border-radius: .5rem; cursor: pointer; transition: background .3s; }
-    #cookieBanner button:hover { background: #7c3aed; }
+    #cookieBanner { position:fixed; bottom:0; left:0; right:0; background:rgba(31,41,55,.95); color:#f9fafb; padding:.75rem 1rem; display:flex; justify-content:space-between; align-items:center; transform:translateY(100%); transition:transform .5s; z-index:10000; }
+    #cookieBanner.show { transform:translateY(0); }
+    #cookieBanner button { background:#8b5cf6; color:white; border:none; padding:.5rem 1rem; border-radius:.5rem; cursor:pointer; transition:background .3s; }
+    #cookieBanner button:hover { background:#7c3aed; }
 
-    /* ANIMATED BACKGROUNDS */
-    .animated-gradient { background: linear-gradient(-45deg, #4f46e5, #3b82f6, #06b6d4, #8b5cf6); background-size: 400% 400%; animation: gradientBG 15s ease infinite; }
-    @keyframes gradientBG { 0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%} }
-    .particle { position: absolute; border-radius: 50%; background: rgba(255,255,255,.15); animation: float 8s ease-in-out infinite; }
-    @keyframes float { 0%,100%{transform:translate(0,0)}50%{transform:translate(var(--dx),var(--dy))} }
-    .typewriter .wrap { border-right: .15em solid currentColor; animation: caret .7s steps(1) infinite; }
-    @keyframes caret { 50%{border-color:transparent} }
+    /* HERO */
+    .animated-gradient { background: linear-gradient(-45deg,#4f46e5,#3b82f6,#06b6d4,#8b5cf6); background-size:400% 400%; animation:gradientBG 15s ease infinite; }
+    @keyframes gradientBG { 0%{background-position:0 50%;}50%{background-position:100% 50%;}100%{background-position:0 50%;} }
+    .particle { position:absolute; border-radius:50%; background:rgba(255,255,255,.15); animation:float 8s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translate(0,0);}50%{transform:translate(var(--dx),var(--dy));} }
+    .typewriter .wrap { border-right:.15em solid currentColor; animation:caret .7s steps(1) infinite; }
+    @keyframes caret { 50%{border-color:transparent;} }
 
-    /* BUTTON PULSING */
-    .cta-btn { position: relative; overflow: hidden; animation: pulseScale 4s ease-in-out infinite; }
-    .cta-btn::after { content: ""; position: absolute; top:50%; left:50%; width:0; height:0; background: rgba(255,255,255,.2); border-radius:50%; transform:translate(-50%,-50%); transition: width .5s, height .5s;}
+    /* CTA */
+    .cta-btn { position:relative; overflow:hidden; animation:pulseScale 4s ease-in-out infinite; }
+    .cta-btn::after { content:""; position:absolute; top:50%; left:50%; width:0; height:0; background:rgba(255,255,255,.2); border-radius:50%; transform:translate(-50%,-50%); transition:width .5s,height .5s;}
     .cta-btn:hover::after { width:200%; height:200%; }
-    @keyframes pulseScale { 0%,100%{transform:scale(1)}50%{transform:scale(1.05)} }
+    @keyframes pulseScale { 0%,100%{transform:scale(1);}50%{transform:scale(1.05);} }
 
-    /* FEATURE CARDS */
-    .feature-card { perspective:1000px; transform-style:preserve-3d; background:rgba(55,65,81,.6); backdrop-filter:blur(12px); padding:2rem; border-radius:1.25rem; transition:transform .4s, box-shadow .4s; cursor:pointer;}
-    .feature-card:hover { transform:rotateX(6deg) rotateY(6deg) translateY(-10px) scale(1.03); box-shadow:0 20px 25px rgba(0,0,0,.3);}
-    .feature-card h3 { transition:color .3s;}
-    .feature-card:hover h3 { color:#a78bfa;}
+    /* FEATURES */
+    .feature-card { perspective:1000px; transform-style:preserve-3d; background:rgba(55,65,81,.6); backdrop-filter:blur(12px); padding:2rem; border-radius:1.25rem; transition:transform .4s,box-shadow .4s; cursor:pointer; }
+    .feature-card:hover { transform:rotateX(6deg) rotateY(6deg) translateY(-10px) scale(1.03); box-shadow:0 20px 25px rgba(0,0,0,.3); }
+    .feature-card h3 { transition:color .3s; }
+    .feature-card:hover h3 { color:#a78bfa; }
 
-    /* DIFFERENCE CARDS */
+    /* DIFFERENCE SECTION */
     .diff-card { background:rgba(31,41,55,.8); padding:1.5rem; border-radius:1rem; display:flex; gap:1rem; align-items:flex-start; transition:transform .3s; }
     .diff-card:hover { transform:translateY(-5px); }
     .diff-icon { flex-shrink:0; width:2.5rem; height:2.5rem; }
     .diff-content h4 { font-size:1.125rem; font-weight:600; }
-    .diff-content p { margin-top:.5rem; }
+    .diff-content p { margin-top:.25rem; }
 
-    /* MISSION CARDS */
+    /* MISSION */
     .mission-card { background:rgba(55,65,81,.6); padding:1.5rem; border-radius:1rem; text-align:center; transition:transform .3s; }
     .mission-card:hover { transform:translateY(-5px); }
     .mission-icon { width:2.5rem; height:2.5rem; margin:0 auto .75rem; }
 
-    /* MODAL & CONFETTI, BACK TO TOP... (rest as before) */
-    /* [Stesse regole di stile già definite sopra per modal, confetti e back-to-top] */
+    /* MODAL */
+    #modal { position:fixed; inset:0; background:rgba(0,0,0,.7); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
+    #modal.show { opacity:1; pointer-events:auto; }
+    #modal .content { background:inherit; backdrop-filter:blur(15px); padding:2rem; border-radius:1rem; color:inherit; max-width:28rem; width:90%; position:relative; }
+    #modalClose { position:absolute; top:.5rem; right:.75rem; background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer; }
+
+    /* CONFETTI CANVAS */
+    #confettiCanvas { position:fixed; inset:0; pointer-events:none; opacity:0; transition:opacity .5s; }
+
+    /* BACK TO TOP */
+    #backToTop { position:fixed; bottom:1.5rem; right:1.5rem; background:#8b5cf6; color:white; border:none; padding:.75rem; border-radius:9999px; cursor:pointer; opacity:0; pointer-events:none; transition:opacity .3s; }
+    #backToTop.show { opacity:1; pointer-events:auto; }
+
+    /* IPHONE MOCKUP */
+    .phone-mockup { position:absolute; width:300px; height:650px; top:50%; right:10%; transform:translateY(-50%) scale(0.9); border:16px solid#111827; border-radius:50px; background:#000; box-shadow:0 20px 40px rgba(0,0,0,.5); overflow:hidden; animation:floatPhone 6s ease-in-out infinite; }
+    @keyframes floatPhone { 0%,100%{transform:translateY(-50%) scale(0.9);}50%{transform:translateY(-45%) scale(0.92);} }
   </style>
 </head>
 <body>
@@ -92,7 +107,7 @@
         <h1 class="text-3xl font-extrabold select-none">Clarivex</h1>
         <nav class="hidden md:flex">
           <a class="nav-link active" data-target="hero">Home</a>
-          <a class="nav-link" href="pricing.html">Pricing</a>
+          <a class="nav-link" href="#pricing">Pricing</a>
           <a class="nav-link" href="tos.html">Terms</a>
           <a class="nav-link" href="privacy.html">Privacy</a>
           <a class="nav-link" href="support.html">Support</a>
@@ -105,15 +120,15 @@
       </div>
       <nav id="mobileNav" class="hidden flex-col bg-gray-800 text-indigo-400 p-6 space-y-4">
         <a class="nav-link" data-target="hero">Home</a>
-        <a class="nav-link" href="pricing.html">Pricing</a>
+        <a class="nav-link" href="#pricing">Pricing</a>
         <a class="nav-link" href="tos.html">Terms</a>
         <a class="nav-link" href="privacy.html">Privacy</a>
         <a class="nav-link" href="support.html">Support</a>
       </nav>
     </header>
 
-    <!-- HERO -->
-    <section id="hero" class="animated-gradient relative text-center py-32 overflow-hidden" data-aos="fade-in">
+    <!-- HERO SECTION -->
+    <section id="hero" class="animated-gradient relative text-center py-32 overflow-hidden">
       <div class="particle w-8 h-8" style="--dx:20px;--dy:-30px;left:15%;top:25%;"></div>
       <div class="particle w-6 h-6" style="--dx:-15px;--dy:25px;left:75%;top:35%;animation-delay:2s;"></div>
       <div class="particle w-10 h-10" style="--dx:30px;--dy:40px;left:50%;top:15%;animation-delay:4s;"></div>
@@ -121,14 +136,19 @@
       <div class="relative z-10 max-w-3xl mx-auto px-6">
         <h2 class="typewriter text-5xl sm:text-6xl font-extrabold mb-6"><span class="wrap"></span></h2>
         <p class="text-xl sm:text-2xl text-indigo-300 mb-12">
-          L’unico bot Discord per gestione server, strumenti avanzati e funzionalità premium.
+          The ultimate Discord bot for server management, advanced tools & premium features.
         </p>
-        <a id="joinBtn" href="https://discord.gg/KSnKbWxyqx" target="_blank"
-           class="cta-btn bg-white text-gray-900 font-bold py-3 px-6 rounded-full shadow-lg inline-block relative">
-          Unisciti a noi
+        <a
+          id="joinBtn"
+          href="https://discord.gg/KSnKbWxyqx"
+          target="_blank"
+          class="cta-btn bg-white text-gray-900 font-bold py-3 px-6 rounded-full shadow-lg inline-block relative"
+        >
+          Join Discord
         </a>
       </div>
 
+      <!-- IPHONE MOCKUP -->
       <div class="phone-mockup" data-aos="fade-left" data-aos-delay="200">
         <div class="phone-screen">
           <img src="your-image.jpg" alt="App Preview">
@@ -136,133 +156,107 @@
       </div>
     </section>
 
-    <!-- THEM vs US -->
+    <!-- PRICING / THEM VS US SECTION -->
     <section id="difference" class="bg-gray-800 py-16">
       <div class="container mx-auto px-6 max-w-4xl grid gap-8">
-        <!-- 1 -->
+        <!-- Pricing Highlight -->
         <div class="diff-card" data-aos="fade-up">
-          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v4l3 3m6 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <div class="diff-content">
-            <h4 class="text-indigo-300">Them</h4>
-            <p>Gli altri dev possono abbandonare il progetto per liti interne o pagamenti.</p>
-            <h4 class="mt-4 text-indigo-100">Us</h4>
-            <p>Noi puntiamo sulla qualità del servizio e garantiamo continuità a tempo indeterminato.</p>
-          </div>
-        </div>
-        <!-- 2 -->
-        <div class="diff-card" data-aos="fade-up" data-aos-delay="100">
           <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
           <div class="diff-content">
-            <h4 class="text-indigo-300">Them</h4>
-            <p>I costi salgono di volta in volta: sviluppo, hosting e extra.</p>
-            <h4 class="mt-4 text-indigo-100">Us</h4>
-            <p>Solo <strong>€3,99/mese</strong>, sempre fisso – aggiornamenti gratuiti inclusi!</p>
+            <h4 class="text-indigo-300">Others</h4>
+            <p>Feature fees and surprise hosting costs.</p>
+            <h4 class="mt-4 text-indigo-100">Clarivex</h4>
+            <p>Just €3,99/month—everything included, no hidden fees!</p>
           </div>
         </div>
-        <!-- 3 -->
-        <div class="diff-card" data-aos="fade-up" data-aos-delay="200">
+        <!-- Quick Setup -->
+        <div class="diff-card" data-aos="fade-up" data-aos-delay="100">
           <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4 -4m2 7H7a2 2 0 01-2 -2V7a2 2 0 012 -2h8" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4m2 7H7a2 2 0 01-2-2V7a2 2 0 012-2h8" />
           </svg>
           <div class="diff-content">
-            <h4 class="text-indigo-300">Them</h4>
-            <p>Setup database lungo e spesso pieno di bug.</p>
-            <h4 class="mt-4 text-indigo-100">Us</h4>
-            <p>Configura tutto con il nostro video-guida e sei operativo in pochi minuti.</p>
+            <h4 class="text-indigo-300">Slow Rollout</h4>
+            <p>Setup slow and buggy, docs outdated.</p>
+            <h4 class="mt-4 text-indigo-100">Instant Go</h4>
+            <p>Interactive tutorials get you live in minutes.</p>
           </div>
         </div>
-        <!-- 4 -->
+        <!-- Support & Updates -->
+        <div class="diff-card" data-aos="fade-up" data-aos-delay="200">
+          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m2-4h.01M17.657 6.343a8 8 0 11-11.314 11.314a8 8 0 0111.314-11.314z" />
+          </svg>
+          <div class="diff-content">
+            <h4 class="text-indigo-300">Uncertain Support</h4>
+            <p>Docs scarce, hours limited.</p>
+            <h4 class="mt-4 text-indigo-100">Clarivex</h4>
+            <p>24/7 live chat, full changelog & weekly guides.</p>
+          </div>
+        </div>
+        <!-- Impartial & Secure -->
         <div class="diff-card" data-aos="fade-up" data-aos-delay="300">
           <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
           <div class="diff-content">
-            <h4 class="text-indigo-300">Them</h4>
-            <p>Rischio di backdoor o abuso di permessi se il dev non è imparziale.</p>
-            <h4 class="mt-4 text-indigo-100">Us</h4>
-            <p>Rispettiamo la neutralità: la tua community prima di tutto.</p>
-          </div>
-        </div>
-        <!-- 5 -->
-        <div class="diff-card" data-aos="fade-up" data-aos-delay="400">
-          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 .828-.895 1.5-2 1.5s-2-.672-2-1.5s.895-1.5 2-1.5s2 .672 2 1.5zM12 19.5v-2m0 0a7.5 7.5 0 01-7.5-7.5h15a7.5 7.5 0 01-7.5 7.5z" />
-          </svg>
-          <div class="diff-content">
-            <h4 class="text-indigo-300">Them</h4>
-            <p>Backup e sicurezza non garantiti: rischio perdita dati.</p>
-            <h4 class="mt-4 text-indigo-100">Us</h4>
-            <p>Backup giornalieri, credenziali uniche e esportazione dati in un click.</p>
-          </div>
-        </div>
-        <!-- 6 -->
-        <div class="diff-card" data-aos="fade-up" data-aos-delay="500">
-          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m2-4h.01M17.657 6.343a8 8 0 11-11.314 11.314a8 8 0 0111.314-11.314z" />
-          </svg>
-          <div class="diff-content">
-            <h4 class="text-indigo-300">Them</h4>
-            <p>Aggiornamenti scoordinati e documentazione spesso carente.</p>
-            <h4 class="mt-4 text-indigo-100">Us</h4>
-            <p>Changelog in tempo reale, esempi completi e supporto sempre disponibile.</p>
+            <h4 class="text-indigo-300">Risk of Backdoors</h4>
+            <p>Unknown developers can misuse permissions.</p>
+            <h4 class="mt-4 text-indigo-100">Clarivex</h4>
+            <p>Fully transparent, audited & secure for any community size.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- MISSION -->
+    <!-- MISSION SECTION -->
     <section id="mission" class="py-20">
       <div class="container mx-auto px-6 max-w-4xl text-center space-y-12">
-        <h2 class="text-3xl font-extrabold" data-aos="fade-up">La nostra mission</h2>
+        <h2 class="text-3xl font-extrabold">Our Mission</h2>
         <div class="grid md:grid-cols-3 gap-8">
           <div class="mission-card" data-aos="fade-up">
             <svg class="mission-icon text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3v4h6v-4c0-1.657-1.343-3-3-3z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5V6m0 0a8 8 0 100 16V18" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3v4h6v-4c0-1.657-1.343-3-3-3z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5V6m0 0a8 8 0 100 16V18"/>
             </svg>
-            <h4 class="text-xl font-semibold">Accessibile & Affidabile</h4>
-            <p class="mt-2">Strumenti per tutti, sempre operativi, senza sorprese.</p>
+            <h4 class="text-xl font-semibold">Always Accessible</h4>
+            <p class="mt-2">Uptime guaranteed, no limits on servers.</p>
           </div>
           <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
             <svg class="mission-icon text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h18M3 12h18M3 19h18" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h18M3 12h18M3 19h18"/>
             </svg>
-            <h4 class="text-xl font-semibold">Per ogni community</h4>
-            <p class="mt-2">Dalle clan fantasy agli RP sci‑fi, fino ai ristoranti virtuali.</p>
+            <h4 class="text-xl font-semibold">Feature-Rich</h4>
+            <p class="mt-2">Moderation, XP, automations & more.</p>
           </div>
           <div class="mission-card" data-aos="fade-up" data-aos-delay="200">
             <svg class="mission-icon text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.105 0-2 .895-2 2s.895 2 2 2s2-.895 2-2s-.895-2-2-2z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4m-4 0a8 8 0 11-8-8v4m0 0H4" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.105 0-2 .895-2 2s.895 2 2 2s2-.895 2-2s-.895-2-2-2z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4m-4 0a8 8 0 11-8-8v4m0 0H4"/>
             </svg>
-            <h4 class="text-xl font-semibold">Prezzo imbattibile</h4>
-            <p class="mt-2">Solo <strong>€3,99/mese</strong>, aggiornamenti inclusi, sconti fedeltà.</p>
+            <h4 class="text-xl font-semibold">Affordably Priced</h4>
+            <p class="mt-2">One flat €3,99/month—always the best deal.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- FEATURES SECTION -->
     <section class="bg-gray-800 py-20">
       <div class="container mx-auto grid md:grid-cols-3 gap-10 px-6 max-w-6xl">
         <div class="feature-card" data-feature="Advanced Moderation" data-aos="fade-up">
           <h3 class="text-2xl font-semibold mb-4">Advanced Moderation</h3>
           <p>Smart commands, auto-moderation & full logs.</p>
-          <button class="learn-btn">Scopri di più</button>
+          <button class="learn-btn">Learn More</button>
         </div>
         <div class="feature-card" data-feature="XP & Levels" data-aos="fade-up" data-aos-delay="100">
           <h3 class="text-2xl font-semibold mb-4">XP & Levels</h3>
-          <p>Incentiva il coinvolgimento con XP, ruoli & classifiche.</p>
-          <button class="learn-btn">Scopri di più</button>
+          <p>Engage your community with XP, ranks & leaderboards.</p>
+          <button class="learn-btn">Learn More</button>
         </div>
         <div class="feature-card" data-feature="Premium Unlocks" data-aos="fade-up" data-aos-delay="200">
           <h3 class="text-2xl font-semibold mb-4">Premium Unlocks</h3>
-          <p>Chiavi di riscatto per funzioni esclusive.</p>
-          <button class="learn-btn">Scopri di più</button>
+          <p>Redeemable keys for exclusive commands.</p>
+          <button class="learn-btn">Learn More</button>
         </div>
       </div>
     </section>
@@ -276,11 +270,15 @@
       </div>
     </div>
 
-    <!-- CTA -->
+    <!-- CALL TO ACTION -->
     <section class="text-center py-16 px-6">
-      <a id="ctaBtn" href="https://discord.com/oauth2/authorize?client_id=1370487453562962101" target="_blank"
-         class="cta-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg">
-        Inizia ora
+      <a
+        id="ctaBtn"
+        href="https://discord.com/oauth2/authorize?client_id=1370487453562962101"
+        target="_blank"
+        class="cta-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg"
+      >
+        Get Started Now
       </a>
     </section>
 
@@ -294,7 +292,7 @@
       <p class="mt-4">&copy; 2025 Clarivex. All rights reserved.</p>
     </footer>
 
-    <!-- BACK TO TOP -->
+    <!-- BACK TO TOP BUTTON -->
     <button id="backToTop" title="Back to top">↑</button>
   </div>
 
@@ -321,98 +319,122 @@
     /* COOKIE BANNER */
     const cookieBanner = document.getElementById('cookieBanner');
     const acceptBtn = document.getElementById('acceptCookies');
-    if (!localStorage.getItem('cookiesAccepted')) setTimeout(() => cookieBanner.classList.add('show'), 800);
-    acceptBtn.onclick = () => { localStorage.setItem('cookiesAccepted','yes'); cookieBanner.classList.remove('show'); };
+    if (!localStorage.getItem('cookiesAccepted')) {
+      setTimeout(() => cookieBanner.classList.add('show'), 800);
+    }
+    acceptBtn.onclick = () => {
+      localStorage.setItem('cookiesAccepted', 'yes');
+      cookieBanner.classList.remove('show');
+    };
 
-    /* HEADER & BACK TO TOP */
+    /* HEADER SHRINK & BACK TO TOP */
     const header = document.getElementById('header');
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-      header.classList.toggle('shrink', window.scrollY > 30);
-      backToTop.classList.toggle('show', window.scrollY > 300);
+      window.scrollY > 30  ? header.classList.add('shrink') : header.classList.remove('shrink');
+      window.scrollY > 300 ? backToTop.classList.add('show') : backToTop.classList.remove('show');
     });
-    backToTop.onclick = () => window.scrollTo({ top:0, behavior:'smooth' });
+    backToTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    /* MOBILE NAV */
+    /* MOBILE NAVIGATION */
     const hamburger = document.getElementById('hamburger');
-    const mobileNav  = document.getElementById('mobileNav');
-    hamburger.onclick = () => { mobileNav.classList.toggle('hidden'); hamburger.classList.toggle('open'); };
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.onclick = () => {
+      mobileNav.classList.toggle('hidden');
+      hamburger.classList.toggle('open');
+    };
 
-    /* TYPEWRITER */
-    (function(){
-      const words = ["Moderazione Avanzata.","XP & Livelli.","Unlock Premium.","Semplice & Potente."];
+    /* TYPEWRITER EFFECT */
+    (function() {
+      const words = ["Advanced Moderation.","XP & Leveling.","Premium Unlocks.","Easy & Powerful."];
       const wrap  = document.querySelector('.wrap');
-      let wi=0, ci=0, del=false;
-      (function type(){
-        const cur = words[wi];
-        wrap.textContent = cur.substr(0, del? --ci: ++ci);
-        if(!del && ci===cur.length) {del=true; return setTimeout(type,1500);}
-        if(del && ci===0){del=false; wi=(wi+1)%words.length;}
-        setTimeout(type, del?50:120);
+      let wi = 0, ci = 0, deleting = false;
+      (function type() {
+        const current = words[wi];
+        if (!deleting) {
+          wrap.textContent = current.substr(0, ++ci);
+          if (ci === current.length) { deleting = true; return setTimeout(type, 1500); }
+        } else {
+          wrap.textContent = current.substr(0, --ci);
+          if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+        }
+        setTimeout(type, deleting ? 50 : 120);
       })();
     })();
 
-    /* MODAL */
+    /* MODAL DETAILS */
     const details = {
-      "Advanced Moderation":"Smart commands, filtri & logs.",
-      "XP & Levels":"XP, ruoli & classifiche.",
-      "Premium Unlocks":"Chiavi per comandi esclusivi."
+      "Advanced Moderation": "Smart commands, filters & logs.",
+      "XP & Levels":        "Experience, ranks & leaderboards.",
+      "Premium Unlocks":    "Redeem keys for exclusive commands."
     };
-    document.querySelectorAll('.learn-btn').forEach(btn=>{
-      btn.onclick=e=>{
-        const feature=e.target.closest('.feature-card').dataset.feature;
-        document.getElementById('modalTitle').textContent=feature;
-        document.getElementById('modalBody').textContent=details[feature];
+    document.querySelectorAll('.learn-btn').forEach(btn => {
+      btn.onclick = e => {
+        const feature = e.target.closest('.feature-card').dataset.feature;
+        document.getElementById('modalTitle').textContent = feature;
+        document.getElementById('modalBody').textContent = details[feature];
         document.getElementById('modal').classList.add('show');
       };
     });
-    document.getElementById('modalClose').onclick=()=>document.getElementById('modal').classList.remove('show');
-    document.getElementById('modal').onclick=e=>{ if(e.target===e.currentTarget) e.currentTarget.classList.remove('show'); };
+    document.getElementById('modalClose').onclick = () => {
+      document.getElementById('modal').classList.remove('show');
+    };
+    document.getElementById('modal').onclick = e => {
+      if (e.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('show');
+      }
+    };
 
-    /* CONFETTI */
+    /* CONFETTI EFFECT */
     const canvas = document.getElementById('confettiCanvas');
     const ctx = canvas.getContext('2d');
-    function resizeCanvas(){ canvas.width=innerWidth; canvas.height=innerHeight; }
-    window.onresize=resizeCanvas; resizeCanvas();
+    function resizeCanvas() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    window.onresize = resizeCanvas;
+    resizeCanvas();
 
-    class Particle{
-      constructor(){
-        this.x=Math.random()*canvas.width;
-        this.y=Math.random()*-canvas.height;
-        this.r=Math.random()*5+3;
-        this.sp=Math.random()*3+2;
-        this.c=`hsl(${Math.random()*360},70%,60%)`;
-        this.tilt=Math.random()*10-10;
-        this.ts=Math.random()*.1+.05;
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * -canvas.height;
+        this.r = Math.random() * 5 + 3;
+        this.sp = Math.random() * 3 + 2;
+        this.c = `hsl(${Math.random() * 360},70%,60%)`;
+        this.tilt = Math.random() * 10 - 10;
+        this.ts = Math.random() * .1 + .05;
       }
-      update(){
-        this.y+=this.sp;
-        this.x+=Math.sin(this.y/10);
-        this.tilt+=this.ts;
-        if(this.y>canvas.height){ this.y=-10; this.x=Math.random()*canvas.width; }
+      update() {
+        this.y += this.sp;
+        this.x += Math.sin(this.y / 10);
+        this.tilt += this.ts;
+        if (this.y > canvas.height) {
+          this.y = -10;
+          this.x = Math.random() * canvas.width;
+        }
       }
-      draw(){
+      draw() {
         ctx.beginPath();
-        ctx.lineWidth=this.r/2;
-        ctx.strokeStyle=this.c;
-        ctx.moveTo(this.x+this.tilt+this.r/2,this.y);
-        ctx.lineTo(this.x+this.tilt,this.y+this.tilt+this.r/2);
+        ctx.lineWidth = this.r / 2;
+        ctx.strokeStyle = this.c;
+        ctx.moveTo(this.x + this.tilt + this.r/2, this.y);
+        ctx.lineTo(this.x + this.tilt, this.y + this.tilt + this.r/2);
         ctx.stroke();
       }
     }
 
-    let particles=[];
-    function startConfetti(){
-      particles=[]; for(let i=0;i<150;i++) particles.push(new Particle());
-      canvas.style.opacity=1; animateConfetti();
-      setTimeout(()=>{canvas.style.opacity=0},3000);
+    let particles = [];
+    function startConfetti() {
+      particles = [];
+      for (let i = 0; i < 150; i++) particles.push(new Particle());
+      canvas.style.opacity = 1;
+      animateConfetti();
+      setTimeout(() => { canvas.style.opacity = 0; }, 3000);
     }
-    function animateConfetti(){
+    function animateConfetti() {
       ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles.forEach(p=>{p.update();p.draw()});
-      if(canvas.style.opacity=="1") requestAnimationFrame(animateConfetti);
+      particles.forEach(p=>{ p.update(); p.draw(); });
+      if (canvas.style.opacity === "1") requestAnimationFrame(animateConfetti);
     }
-    document.getElementById('ctaBtn').onclick=startConfetti;
+    document.getElementById('ctaBtn').onclick = startConfetti;
   </script>
 </body>
 </html>
