@@ -54,6 +54,19 @@
     .feature-card h3 { transition: color .3s; }
     .feature-card:hover h3 { color: #a78bfa; }
 
+    /* DIFFERENCE SECTION */
+    .diff-card { background: rgba(31,41,55,.8); padding: 1.5rem; border-radius: 1rem; display: flex; gap: 1rem; align-items: flex-start; transition: transform .3s; }
+    .diff-card:hover { transform: translateY(-5px); }
+    .diff-icon { flex-shrink: 0; width: 2.5rem; height: 2.5rem; }
+    .diff-content { flex: 1; }
+    .diff-content h4 { font-size: 1.125rem; font-weight: 600; }
+    .diff-content p { margin-top: .25rem; }
+
+    /* MISSION */
+    .mission-card { background: rgba(55,65,81,.6); padding: 1.5rem; border-radius: 1rem; text-align: center; transition: transform .3s; }
+    .mission-card:hover { transform: translateY(-5px); }
+    .mission-icon { width: 2.5rem; height: 2.5rem; margin: 0 auto .75rem; }
+
     /* MODAL */
     #modal { position: fixed; inset: 0; background: rgba(0,0,0,.7); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s; }
     #modal.show { opacity: 1; pointer-events: auto; }
@@ -143,6 +156,119 @@
         <div class="phone-screen">
           <!-- Inserisci qui la tua immagine -->
           <img src="your-image.jpg" alt="App Preview">
+        </div>
+      </div>
+    </section>
+
+    <!-- THEM VS US SECTION -->
+    <section id="difference" class="bg-gray-800 py-16">
+      <div class="container mx-auto px-6 max-w-4xl grid gap-8">
+        <!-- Caring & Commitment -->
+        <div class="diff-card" data-aos="fade-up">
+          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div class="diff-content">
+            <h4 class="text-indigo-300">Them</h4>
+            <p>Other developers may quit on your group after disputes or payment issues.</p>
+            <h4 class="mt-4 text-indigo-100">Us</h4>
+            <p>We care about our service and run indefinitely, with continuous improvements!</p>
+          </div>
+        </div>
+        <!-- Free Features -->
+        <div class="diff-card" data-aos="fade-up" data-aos-delay="100">
+          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          <div class="diff-content">
+            <h4 class="text-indigo-300">Them</h4>
+            <p>Contracted developers charge per feature plus hosting fees.</p>
+            <h4 class="mt-4 text-indigo-100">Us</h4>
+            <p>Only $5/month, never increasing—every update is free to subscribers!</p>
+          </div>
+        </div>
+        <!-- Quick Setup -->
+        <div class="diff-card" data-aos="fade-up" data-aos-delay="200">
+          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4 -4m2 7H7a2 2 0 01-2 -2V7a2 2 0 012 -2h8" />
+          </svg>
+          <div class="diff-content">
+            <h4 class="text-indigo-300">Them</h4>
+            <p>New database setups take months of debugging with uncertain results.</p>
+            <h4 class="mt-4 text-indigo-100">Us</h4>
+            <p>Follow our tutorial video and run your clan in minutes, hassle‑free.</p>
+          </div>
+        </div>
+        <!-- Trust & Neutrality -->
+        <div class="diff-card" data-aos="fade-up" data-aos-delay="300">
+          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <div class="diff-content">
+            <h4 class="text-indigo-300">Them</h4>
+            <p>Some devs may backdoor your game or abuse admin powers.</p>
+            <h4 class="mt-4 text-indigo-100">Us</h4>
+            <p>We manage 3,000+ groups impartially—your success is our only goal.</p>
+          </div>
+        </div>
+        <!-- Security & Backup -->
+        <div class="diff-card" data-aos="fade-up" data-aos-delay="400">
+          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 .828-.895 1.5-2 1.5s-2-.672-2-1.5s.895-1.5 2-1.5s2 .672 2 1.5zM12 19.5v-2m0 0a7.5 7.5 0 01-7.5-7.5h15a7.5 7.5 0 01-7.5 7.5z" />
+          </svg>
+          <div class="diff-content">
+            <h4 class="text-indigo-300">Them</h4>
+            <p>Data may be hosted insecurely, risking permanent loss.</p>
+            <h4 class="mt-4 text-indigo-100">Us</h4>
+            <p>Daily backups, per‑clan credentials & API keys; export anytime.</p>
+          </div>
+        </div>
+        <!-- Updates & Support -->
+        <div class="diff-card" data-aos="fade-up" data-aos-delay="500">
+          <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m2-4h.01M17.657 6.343a8 8 0 11-11.314 11.314a8 8 0 0111.314-11.314z" />
+          </svg>
+          <div class="diff-content">
+            <h4 class="text-indigo-300">Them</h4>
+            <p>Changes may go undocumented, leaving you in the dark.</p>
+            <h4 class="mt-4 text-indigo-100">Us</h4>
+            <p>All updates announced; full docs, examples & 24/7 support team.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSION SECTION -->
+    <section id="mission" class="py-20">
+      <div class="container mx-auto px-6 max-w-4xl text-center space-y-12">
+        <h2 class="text-3xl font-extrabold">Our Mission</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Mission Statement -->
+          <div class="mission-card" data-aos="fade-up">
+            <svg class="mission-icon text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3v4h6v-4c0-1.657-1.343-3-3-3z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5V6m0 0a8 8 0 100 16V18" />
+            </svg>
+            <h4 class="text-xl font-semibold">Accessible, Reliable & Affordable</h4>
+            <p class="mt-2">Tools everyone can use, with rock‑solid uptime and one flat rate.</p>
+          </div>
+          <!-- Multiple Genres -->
+          <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
+            <svg class="mission-icon text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h18M3 12h18M3 19h18" />
+            </svg>
+            <h4 class="text-xl font-semibold">Multiple Genres</h4>
+            <p class="mt-2">Star Wars, Modern & Sci‑Fi Military, RPG, Clans, SCP, Restaurants & more.</p>
+          </div>
+          <!-- Great Price -->
+          <div class="mission-card" data-aos="fade-up" data-aos-delay="200">
+            <svg class="mission-icon text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.105 0-2 .895-2 2s.895 2 2 2s2-.895 2-2s-.895-2-2-2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4m-4 0a8 8 0 11-8-8v4m0 0H4" />
+            </svg>
+            <h4 class="text-xl font-semibold">Great Price</h4>
+            <p class="mt-2">Always $5/month with new updates included; longer-term patrons get discounts.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -305,7 +431,7 @@
         this.y = Math.random() * -canvas.height;
         this.r = Math.random() * 5 + 3;
         this.sp = Math.random() * 3 + 2;
-        this.c = hsl(${Math.random() * 360},70%,60%);
+        this.c = `hsl(${Math.random() * 360},70%,60%)`;
         this.tilt = Math.random() * 10 - 10;
         this.ts = Math.random() * .1 + .05;
       }
