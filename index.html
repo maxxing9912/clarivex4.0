@@ -10,99 +10,169 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <style>
-    /* GLOBAL */
-    body { margin:0; font-family: system-ui, sans-serif; background: #0f172a; color: #fff; overflow-x: hidden; }
-    a { transition: color .2s; } a:hover { color: #8b5cf6; }
+    /* THEME */
+    body.light { background: #f9fafb; color: #1e293b; }
+    body.dark  { background: #0f172a; color: #f1f5f9; }
 
     /* LOADER */
-    #loader { position: fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-      background: linear-gradient(135deg,#0f172a,#1e293b); color:#38bdf8; z-index:9999; transition:opacity .5s;
+    #loader {
+      position: fixed; inset:0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(135deg,#0f172a,#1e293b);
+      color: #38bdf8; z-index: 9999; transition: opacity .5s;
     }
-    .spinner { width:80px; height:80px; border:8px solid rgba(56,189,248,.2); border-top-color:#38bdf8;
-      border-radius:50%; animation:spin 1s linear infinite;
+    body.light #loader {
+      background: linear-gradient(135deg,#f1f5f9,#e2e8f0);
+      color: #4f46e5;
     }
-    @keyframes spin { to{transform:rotate(360deg);} }
-    #progress { margin-top:.5rem; font:1.2rem monospace; }
+    .spinner {
+      width: 100px; height: 100px;
+      border: 8px solid rgba(56,189,248,.2);
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #progress { margin-top: .5rem; font: 1.2rem monospace; }
 
-    /* DISCORD BAR & THEME TOGGLE */
-    #discordBar { position:fixed; top:1rem; right:1rem; display:flex; gap:.5rem; align-items:center; z-index:50; }
-    #discordBar a, #discordBar button { font-size:.9rem; }
-    #darkModeToggle { background:rgba(255,255,255,.1); border:none; padding:.5rem; border-radius:9999px; cursor:pointer; }
+    /* DISCORD LOGIN BAR */
+    #discordBar {
+      position: fixed; top: 1rem; right: 1rem;
+      display: flex; gap: .5rem; align-items: center;
+      z-index: 50;
+    }
+    #discordLoginBtn, #darkModeToggle {
+      background: rgba(255,255,255,.1); color: inherit;
+      border: none; padding: .5rem; border-radius: 9999px;
+      cursor: pointer; font-size: .9rem;
+    }
 
     /* HEADER */
-    header { position:sticky; top:0; backdrop-filter:blur(8px); background:rgba(31,41,55,.8);
-      transition:padding .3s; padding:1.5rem 0; z-index:40;
+    header {
+      position: sticky; top: 0; backdrop-filter: blur(8px);
+      background: rgba(31,41,55,.8); transition: padding .3s;
+      padding: 1.5rem 0; z-index: 40;
     }
-    header.shrink { padding:.75rem 0; }
-    .nav-link { margin-left:1.5rem; position:relative; padding-bottom:.25rem; cursor:pointer; }
-    .nav-link::after { content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:currentColor; transition:width .3s; }
-    .nav-link:hover::after, .nav-link.active::after { width:100%; }
+    header.shrink { padding: .75rem 0; }
+    .nav-link {
+      margin-left: 1.5rem; position: relative; padding-bottom: .25rem;
+      cursor: pointer; transition: color .3s;
+    }
+    .nav-link::after {
+      content: ""; position: absolute; left:0; bottom:0;
+      width:0; height:2px; background: currentColor; transition: width .3s;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after { width:100%; }
 
     /* COOKIE BANNER */
-    #cookieBanner { position:fixed; bottom:0; left:0; right:0; background:rgba(31,41,55,.95);
-      color:#f9fafb; padding:.75rem 1rem; display:flex; justify-content:space-between; transform:translateY(100%);
-      transition:transform .5s; z-index:30;
+    #cookieBanner {
+      position: fixed; bottom:0; left:0; right:0;
+      background: rgba(31,41,55,.95); color: #f9fafb;
+      padding: .75rem 1rem; display: flex; justify-content: space-between;
+      transform: translateY(100%); transition: transform .5s; z-index:30;
     }
-    #cookieBanner.show { transform:translateY(0); }
-    #cookieBanner button { background:#8b5cf6; color:#fff; border:none; padding:.5rem 1rem; border-radius:.5rem; cursor:pointer; }
-    #cookieBanner button:hover { background:#7c3aed; }
+    #cookieBanner.show { transform: translateY(0); }
+    #cookieBanner button {
+      background: #8b5cf6; color: #fff; border: none;
+      padding: .5rem 1rem; border-radius: .5rem; cursor: pointer;
+      transition: background .3s;
+    }
+    #cookieBanner button:hover { background: #7c3aed; }
 
     /* HERO */
-    .animated-gradient { background: linear-gradient(-45deg,#4f46e5,#3b82f6,#06b6d4,#8b5cf6);
-      background-size:400% 400%; animation:gradientBG 15s ease infinite;
+    .animated-gradient {
+      background: linear-gradient(-45deg,#4f46e5,#3b82f6,#06b6d4,#8b5cf6);
+      background-size: 400% 400%; animation: gradientBG 15s ease infinite;
     }
-    @keyframes gradientBG { 0%,100%{background-position:0 50%}50%{background-position:100% 50%} }
-    .particle { position:absolute; border-radius:50%; background:rgba(255,255,255,.15);
-      animation:float 8s ease-in-out infinite;
+    @keyframes gradientBG {
+      0%,100% { background-position: 0 50%; }
+      50% { background-position: 100% 50%; }
     }
-    @keyframes float {0%,100%{transform:translate(0,0)}50%{transform:translate(var(--dx),var(--dy))}}
+    .particle {
+      position: absolute; border-radius: 50%; background: rgba(255,255,255,.15);
+      animation: float 8s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translate(0,0); }
+      50% { transform: translate(var(--dx),var(--dy)); }
+    }
+    .typewriter .wrap {
+      border-right: .15em solid currentColor;
+      animation: caret .7s steps(1) infinite;
+    }
+    @keyframes caret { 50% { border-color: transparent; } }
 
-    .typewriter .wrap { border-right:.15em solid currentColor; animation:caret .7s steps(1) infinite; }
-    @keyframes caret {50%{border-color:transparent}}
-
-    /* CTA */
-    .cta-btn { position:relative; overflow:hidden; animation:pulseScale 4s ease-in-out infinite; }
-    .cta-btn::after { content:""; position:absolute; top:50%; left:50%; width:0; height:0;
-      background:rgba(255,255,255,.2); border-radius:50%; transform:translate(-50%,-50%); transition:width .5s, height .5s;
+    /* CTA BUTTON */
+    .cta-btn {
+      position: relative; overflow: hidden;
+      animation: pulseScale 4s ease-in-out infinite;
+    }
+    .cta-btn::after {
+      content: ""; position: absolute; top:50%; left:50%;
+      width:0; height:0; background: rgba(255,255,255,.2);
+      border-radius:50%; transform: translate(-50%,-50%);
+      transition: width .5s, height .5s;
     }
     .cta-btn:hover::after { width:200%; height:200%; }
-    @keyframes pulseScale {0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+    @keyframes pulseScale {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
 
     /* FEATURE CARDS */
-    .feature-card { background:rgba(55,65,81,.6); backdrop-filter:blur(12px);
-      padding:2rem; border-radius:1.25rem; perspective:1000px; transform-style:preserve-3d;
-      transition:transform .4s, box-shadow .4s; cursor:pointer;
+    .feature-card {
+      perspective: 1000px; transform-style: preserve-3d;
+      background: rgba(55,65,81,.6); backdrop-filter: blur(12px);
+      padding: 2rem; border-radius: 1.25rem;
+      transition: transform .4s, box-shadow .4s; cursor: pointer;
     }
-    .feature-card:hover { transform:rotateX(6deg) rotateY(6deg) translateY(-10px) scale(1.03);
-      box-shadow:0 20px 25px rgba(0,0,0,.3);
+    .feature-card:hover {
+      transform: rotateX(6deg) rotateY(6deg) translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 25px rgba(0,0,0,.3);
     }
-    .feature-card h3 { transition:color .3s; }
-    .feature-card:hover h3 { color:#a78bfa; }
+    .feature-card h3 { transition: color .3s; }
+    .feature-card:hover h3 { color: #a78bfa; }
 
     /* MODAL */
-    #modal { position:fixed; inset:0; background:rgba(0,0,0,.7); display:flex; align-items:center; justify-content:center;
-      opacity:0; pointer-events:none; transition:opacity .3s; z-index:50;
+    #modal {
+      position: fixed; inset:0; background: rgba(0,0,0,.7);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .3s; z-index:50;
     }
     #modal.show { opacity:1; pointer-events:auto; }
-    #modal .content { background:inherit; backdrop-filter:blur(15px); padding:2rem; border-radius:1rem; max-width:28rem; width:90%; position:relative; }
-    #modalClose { position:absolute; top:.5rem; right:.75rem; background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer; }
+    #modal .content {
+      background: inherit; backdrop-filter: blur(15px);
+      padding:2rem; border-radius:1rem; max-width:28rem; width:90%; position:relative;
+    }
+    #modalClose {
+      position:absolute; top:.5rem; right:.75rem;
+      background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer;
+    }
 
-    /* IPHONE MOCKUP */
-    .iphone-mockup { position:relative; width:300px; margin:0 auto; }
-    .iphone-frame { width:100%; border:16px solid #000; border-radius:40px; padding:20px; background:#000; box-shadow:0 10px 30px rgba(0,0,0,.5); }
-    .iphone-frame .screen { width:100%; height:600px; background:#111; border-radius:20px; overflow:hidden; }
+    /* IPHONE 16 PRO MOCKUP */
+    .iphone-mockup { margin: 0 auto; width: 360px; perspective: 1000px; }
+    .iphone-mockup img { width: 100%; border-radius: 40px; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+    .iphone-mockup .screen {
+      position: absolute; top: 7%; left: 4.5%;
+      width: 91%; height: 85%; overflow: hidden;
+      border-radius: 30px;
+    }
 
-    /* CONFETTI */
-    #confettiCanvas { position:fixed; inset:0; pointer-events:none; opacity:0; transition:opacity .5s; z-index:10; }
+    /* CONFETTI CANVAS */
+    #confettiCanvas { position: fixed; inset:0; pointer-events: none; opacity:0; transition: opacity .5s; z-index:10; }
 
     /* BACK TO TOP */
-    #backToTop { position:fixed; bottom:1.5rem; right:1.5rem; background:#8b5cf6; color:#fff; border:none; padding:.75rem; border-radius:9999px;
+    #backToTop {
+      position: fixed; bottom:1.5rem; right:1.5rem;
+      background:#8b5cf6; color:#fff; border:none; padding:.75rem; border-radius:9999px;
       cursor:pointer; opacity:0; pointer-events:none; transition:opacity .3s; z-index:40;
     }
     #backToTop.show { opacity:1; pointer-events:auto; }
   </style>
 </head>
-<body>
+<body class="dark">
 
   <!-- LOADER -->
   <div id="loader">
@@ -112,7 +182,11 @@
 
   <!-- DISCORD BAR + THEME -->
   <div id="discordBar">
-    <a id="discordLoginBtn" href="/auth/discord" class="bg-indigo-600 px-3 py-1 rounded-full">Login with Discord</a>
+    <span id="discordUserInfo">
+      <img id="discordAvatar" src="" alt="Avatar" style="width:32px;height:32px;border-radius:50%;" />
+      <span id="discordUsernameTag"></span>
+    </span>
+    <a id="discordLoginBtn" href="/auth/discord">Login with Discord</a>
     <button id="darkModeToggle">🌓</button>
   </div>
 
@@ -122,7 +196,7 @@
     <button id="acceptCookies">Accept</button>
   </div>
 
-  <!-- PAGE CONTENT -->
+  <!-- MAIN CONTENT -->
   <div id="content" class="opacity-0 transition-opacity duration-500">
 
     <!-- HEADER -->
@@ -150,7 +224,6 @@
       <div class="particle w-8 h-8" style="--dx:20px;--dy:-30px;left:10%;top:30%;"></div>
       <div class="particle w-6 h-6" style="--dx:-15px;--dy:25px;left:85%;top:35%;animation-delay:2s;"></div>
       <div class="particle w-10 h-10" style="--dx:30px;--dy:40px;left:50%;top:20%;animation-delay:4s;"></div>
-
       <div class="max-w-3xl mx-auto px-6" data-aos="fade-up">
         <h1 class="typewriter text-5xl sm:text-6xl font-extrabold mb-4"><span class="wrap"></span></h1>
         <p class="text-xl text-indigo-300 mb-8">Automate moderation, progression & analytics — all in one place.</p>
@@ -161,18 +234,18 @@
     <!-- FEATURES -->
     <section id="features" class="py-20 bg-gray-800">
       <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
-        <div class="feature-card" data-aos="fade-up">
+        <div class="feature-card" data-feature="Advanced Moderation" data-aos="fade-up">
           <h3 class="text-2xl font-semibold mb-2">Advanced Moderation</h3>
           <p>Smart commands, auto‑moderation & full logs.</p>
           <button class="learn-btn mt-4">Learn More</button>
         </div>
-        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-card" data-feature="XP & Levelling" data-aos="fade-up" data-aos-delay="100">
           <h3 class="text-2xl font-semibold mb-2">XP & Levelling</h3>
           <p>Reward active members with XP, ranks & leaderboards.</p>
           <button class="learn-btn mt-4">Learn More</button>
         </div>
-        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-2xl font-semibold mb-2">Analytics Dashboard</h3>
+        <div class="feature-card" data-feature="Analytics Dashboard" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-2xl font-semibold mb-2">Analytics Dashboard</h3>  
           <p>Track member activity, engagement metrics & growth.</p>
           <button class="learn-btn mt-4">Learn More</button>
         </div>
@@ -183,11 +256,11 @@
     <section id="mockup" class="py-20">
       <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
         <h2 class="text-3xl font-bold mb-6">Live Demo</h2>
-        <div class="iphone-mockup mx-auto">
-          <div class="iphone-frame">
-            <div class="screen">
-              <!-- Drop your screenshot here -->
-            </div>
+        <div class="iphone-mockup">
+          <!-- Desert Titanium iPhone 16 Pro mockup (transparent PNG) -->
+          <img src="https://img.freepik.com/free-psd/desert-titanium-iphone-16-pro-mockup-template-only-frame-transparent-png-isolated-blank-screen_410268573.jpg" alt="iPhone 16 Pro Mockup" />
+          <div class="screen">
+            <!-- Drop your app screenshot here -->
           </div>
         </div>
       </div>
@@ -226,108 +299,113 @@
 
     <!-- BACK TO TOP -->
     <button id="backToTop" title="Back to top" class="text-2xl">↑</button>
-
-  </div><!-- /#content -->
+  </div>
 
   <!-- AOS & SCRIPTS -->
   <canvas id="confettiCanvas"></canvas>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ once:true, duration:800, easing:'ease-in-out' });
+    AOS.init({ once: true, duration: 800, easing: 'ease-in-out' });
 
     /* LOADER */
-    let pct=0, prog=document.getElementById('progress'),
-        loader=document.getElementById('loader'),
-        content=document.getElementById('content');
-    let li=setInterval(()=>{
-      pct+=5; prog.textContent=pct+'%';
-      if(pct>=100){ clearInterval(li); loader.style.opacity=0;
-        setTimeout(()=>{ loader.style.display='none'; content.style.opacity=1; },500);
+    let pct = 0, prog = document.getElementById('progress'),
+        loader = document.getElementById('loader'),
+        content = document.getElementById('content');
+    let li = setInterval(()=>{
+      pct += 5; prog.textContent = pct + '%';
+      if(pct >= 100){ clearInterval(li); loader.style.opacity = 0;
+        setTimeout(()=>{ loader.style.display='none'; content.style.opacity=1; }, 500);
       }
-    },50);
+    }, 50);
 
     /* COOKIE BANNER */
-    let cb=document.getElementById('cookieBanner'),
-        ac=document.getElementById('acceptCookies');
+    const cb = document.getElementById('cookieBanner'),
+          ac = document.getElementById('acceptCookies');
     if(!localStorage.getItem('cookiesAccepted')) setTimeout(()=>cb.classList.add('show'),800);
-    ac.onclick=()=>{ localStorage.setItem('cookiesAccepted','yes'); cb.classList.remove('show'); };
+    ac.onclick = ()=>{ localStorage.setItem('cookiesAccepted','yes'); cb.classList.remove('show'); };
 
     /* DISCORD LOGIN CHECK */
-    window.addEventListener('DOMContentLoaded',()=>{
-      const loginBtn=document.getElementById('discordLoginBtn');
+    window.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('discordLoginBtn'),
+            info = document.getElementById('discordUserInfo');
       fetch('/api/me').then(r=>{
         if(!r.ok) throw 0; return r.json();
       }).then(u=>{
-        loginBtn.textContent='Logout'; loginBtn.href='/logout';
+        info.style.display='flex';
+        btn.textContent='Logout'; btn.href='/logout';
+        document.getElementById('discordAvatar').src =
+          u.avatar
+            ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar.startsWith('a_')?u.avatar+'.gif':u.avatar+'.png'}?size=64`
+            : `https://cdn.discordapp.com/embed/avatars/${parseInt(u.discriminator)%5}.png`;
+        document.getElementById('discordUsernameTag').textContent = `${u.username}#${u.discriminator}`;
       }).catch(()=>{
-        loginBtn.textContent='Login with Discord'; loginBtn.href='/auth/discord';
+        info.style.display='none';
+        btn.textContent='Login with Discord'; btn.href='/auth/discord';
       });
     });
 
     /* THEME TOGGLE */
-    const dm=document.getElementById('darkModeToggle');
-    dm.onclick=()=>{
+    const dm = document.getElementById('darkModeToggle');
+    dm.onclick = ()=>{
+      document.body.classList.toggle('dark');
       document.body.classList.toggle('light');
-      localStorage.setItem('theme', document.body.classList.contains('light')?'light':'dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark')?'dark':'light');
     };
-    if(localStorage.getItem('theme')==='light') document.body.classList.add('light');
+    if(localStorage.getItem('theme')==='light') document.body.classList.replace('dark','light');
 
     /* HEADER SHRINK & BACK TO TOP */
-    const hdr=document.getElementById('header'),
-          topBtn=document.getElementById('backToTop');
+    const hdr = document.getElementById('header'),
+          topBtn = document.getElementById('backToTop');
     window.addEventListener('scroll',()=>{
       window.scrollY>30?hdr.classList.add('shrink'):hdr.classList.remove('shrink');
       window.scrollY>300?topBtn.classList.add('show'):topBtn.classList.remove('show');
     });
-    topBtn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+    topBtn.onclick = ()=>window.scrollTo({ top:0, behavior:'smooth' });
 
     /* MOBILE NAV */
-    const ham=document.getElementById('hamburger'),
-          mob=document.getElementById('mobileNav');
-    ham.onclick=()=>mob.classList.toggle('hidden');
+    document.getElementById('hamburger').onclick = ()=>{
+      document.getElementById('mobileNav').classList.toggle('hidden');
+    };
 
     /* TYPEWRITER */
-    (function(){ const words=["Advanced Moderation.","XP & Levelling.","Premium Unlocks.","Powerful & Easy."],
-        wrap=document.querySelector('.wrap');
+    (function(){
+      const words=["Advanced Moderation.","XP & Levelling.","Premium Unlocks.","Powerful & Easy."],
+            wrap=document.querySelector('.wrap');
       let wi=0,ci=0,del=false;
       (function t(){
-        let full=words[wi];
-        if(!del){ wrap.textContent=full.substr(0,++ci);
+        const full = words[wi];
+        if(!del){
+          wrap.textContent = full.substr(0, ++ci);
           if(ci===full.length){ del=true; return setTimeout(t,1500); }
         } else {
-          wrap.textContent=full.substr(0,--ci);
+          wrap.textContent = full.substr(0, --ci);
           if(ci===0){ del=false; wi=(wi+1)%words.length; }
         }
-        setTimeout(t,del?50:120);
+        setTimeout(t, del?50:120);
       })();
     })();
 
     /* MODAL DETAILS */
-    const details={
+    const details = {
       "Advanced Moderation":"Smart commands, filters & logs.",
       "XP & Levelling":"Experience, ranks & leaderboards.",
       "Analytics Dashboard":"Track member activity & engagement."
     };
     document.querySelectorAll('.learn-btn').forEach(btn=>{
-      btn.onclick=e=>{
-        let f=e.target.closest('.feature-card').querySelector('h3').textContent;
-        document.getElementById('modalTitle').textContent=f;
-        document.getElementById('modalBody').textContent=details[f]||'';
+      btn.onclick = e=>{
+        const f = e.target.closest('.feature-card').querySelector('h3').textContent;
+        document.getElementById('modalTitle').textContent = f;
+        document.getElementById('modalBody').textContent = details[f]||'';
         document.getElementById('modal').classList.add('show');
       };
     });
-    document.getElementById('modalClose').onclick=()=>{
-      document.getElementById('modal').classList.remove('show');
-    };
-    document.getElementById('modal').onclick=e=>{
-      if(e.target===document.getElementById('modal'))
-        document.getElementById('modal').classList.remove('show');
-    };
+    document.getElementById('modalClose').onclick = ()=>document.getElementById('modal').classList.remove('show');
+    document.getElementById('modal').onclick = e=>{ if(e.target.id==='modal') e.target.classList.remove('show'); };
 
     /* CONFETTI */
-    const cvs=document.getElementById('confettiCanvas'), ctx=cvs.getContext('2d');
+    const cvs = document.getElementById('confettiCanvas'), ctx = cvs.getContext('2d');
     function resize(){ cvs.width=innerWidth; cvs.height=innerHeight; }
-    window.onresize=resize; resize();
+    window.onresize = resize; resize();
     class P{ constructor(){
         this.x=Math.random()*cvs.width; this.y=Math.random()*-cvs.height;
         this.r=Math.random()*5+3; this.sp=Math.random()*3+2;
@@ -347,10 +425,9 @@
       cvs.style.opacity=1; step(); setTimeout(()=>cvs.style.opacity=0,3000);
     }
     function step(){ ctx.clearRect(0,0,cvs.width,cvs.height);
-      parts.forEach(p=>{p.upd();p.draw();});
-      if(cvs.style.opacity=="1") requestAnimationFrame(step);
+      parts.forEach(p=>{p.upd();p.draw();}); if(cvs.style.opacity=="1") requestAnimationFrame(step);
     }
-    document.getElementById('ctaBtn').onclick=startConf;
+    document.getElementById('ctaBtn').onclick = startConf;
   </script>
 </body>
 </html>
