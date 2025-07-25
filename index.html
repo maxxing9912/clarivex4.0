@@ -8,33 +8,41 @@
   <!-- Tailwind & AOS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
   <style>
-    /* GLOBAL TEXT COLOR */
-    body { color: #ffffff; }
+    body { color: #ffffff; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; background: linear-gradient(120deg,#181824 0%,#23234a 60%,#2c2c54 100%); min-height: 100vh; }
 
-    /* LOADER */
     #loader { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg,#0f172a,#1e293b); color:#38bdf8; z-index:9999; transition:opacity .5s; }
     .spinner { width:100px;height:100px;border:8px solid rgba(56,189,248,.2);border-top-color:#38bdf8;border-radius:50%;animation:spin 1s linear infinite; }
     @keyframes spin { to { transform:rotate(360deg); } }
     #progress { margin-top:.5rem;font:1.2rem monospace; }
 
-    /* HEADER */
     header { position:sticky; top:0; backdrop-filter:blur(8px); padding:1.5rem 0; transition:all .4s ease; background:rgba(31,41,55,.8); }
     header.shrink { padding:.75rem 0; }
-
-    /* NAV LINKS */
+    header {
+      background: linear-gradient(90deg,#23234a 60%,#7f5af0 100%);
+      box-shadow: 0 2px 24px 0 rgba(44,182,125,0.08);
+      border-bottom: 1px solid #23234a;
+    }
     .nav-link { margin-left:1.5rem; position:relative; padding-bottom:.25rem; cursor:pointer; transition:color .3s; }
     .nav-link::after { content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:currentColor; transition:width .3s; }
     .nav-link:hover::after, .nav-link.active::after { width:100%; }
+    header .nav-link {
+      color: #b8b8ff;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: color .2s;
+    }
+    header .nav-link:hover, header .nav-link.active {
+      color: #7f5af0;
+    }
 
-    /* COOKIE BANNER */
     #cookieBanner { position:fixed; bottom:0; left:0; right:0; background:rgba(31,41,55,.95); color:#f9fafb; padding:.75rem 1rem; display:flex; justify-content:space-between; align-items:center; transform:translateY(100%); transition:transform .5s; z-index:10000; }
     #cookieBanner.show { transform:translateY(0); }
     #cookieBanner button { background:#8b5cf6; color:white; border:none; padding:.5rem 1rem; border-radius:.5rem; cursor:pointer; transition:background .3s; }
     #cookieBanner button:hover { background:#7c3aed; }
 
-    /* HERO */
     .animated-gradient { background: linear-gradient(-45deg,#4f46e5,#3b82f6,#06b6d4,#8b5cf6); background-size:400% 400%; animation:gradientBG 15s ease infinite; }
     @keyframes gradientBG { 0%{background-position:0 50%;}50%{background-position:100% 50%;}100%{background-position:0 50%;} }
     .particle { position:absolute; border-radius:50%; background:rgba(255,255,255,.15); animation:float 8s ease-in-out infinite; }
@@ -42,46 +50,68 @@
     .typewriter .wrap { border-right:.15em solid currentColor; animation:caret .7s steps(1) infinite; }
     @keyframes caret { 50%{border-color:transparent;} }
 
-    /* CTA */
-    .cta-btn { position:relative; overflow:hidden; animation:pulseScale 4s ease-in-out infinite; }
-    .cta-btn::after { content:""; position:absolute; top:50%; left:50%; width:0; height:0; background:rgba(255,255,255,.2); border-radius:50%; transform:translate(-50%,-50%); transition:width .5s,height .5s;}
-    .cta-btn:hover::after { width:200%; height:200%; }
-    @keyframes pulseScale { 0%,100%{transform:scale(1);}50%{transform:scale(1.05);} }
+    .cta-btn {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(90deg,#7f5af0,#2cb67d 80%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.25rem;
+      border-radius: 9999px;
+      box-shadow: 0 8px 32px 0 rgba(127,90,240,0.18);
+      transition: transform .18s cubic-bezier(.4,0,.2,1), box-shadow .18s;
+    }
+    .cta-btn:hover, .cta-btn:focus {
+      transform: scale(1.06) rotate(-1deg);
+      box-shadow: 0 12px 40px 0 rgba(44,182,125,0.18);
+      background: linear-gradient(90deg,#2cb67d,#7f5af0 80%);
+    }
+    @keyframes pulseBtn {
+      0% { box-shadow: 0 0 0 0 rgba(127,90,240,0.5);}
+      70% { box-shadow: 0 0 0 18px rgba(127,90,240,0);}
+      100% { box-shadow: 0 0 0 0 rgba(127,90,240,0);}
+    }
+    .animate-pulse {
+      animation: pulseBtn 0.7s cubic-bezier(.4,0,.6,1) 2;
+    }
 
-    /* FEATURES */
-    .feature-card { perspective:1000px; transform-style:preserve-3d; background:rgba(55,65,81,.6); backdrop-filter:blur(12px); padding:2rem; border-radius:1.25rem; transition:transform .4s,box-shadow .4s; cursor:pointer; }
+    .feature-card, .diff-card, .mission-card {
+      background: linear-gradient(120deg,rgba(44,182,125,0.08),rgba(127,90,240,0.09) 80%);
+      backdrop-filter: blur(12px);
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 32px 0 rgba(44,182,125,0.08);
+      border: 1.5px solid rgba(127,90,240,0.13);
+    }
+
+    .feature-card { perspective:1000px; transform-style:preserve-3d; padding:2rem; transition:transform .4s,box-shadow .4s; cursor:pointer; }
     .feature-card:hover { transform:rotateX(6deg) rotateY(6deg) translateY(-10px) scale(1.03); box-shadow:0 20px 25px rgba(0,0,0,.3); }
     .feature-card h3 { transition:color .3s; }
     .feature-card:hover h3 { color:#a78bfa; }
 
-    /* DIFFERENCE SECTION */
-    .diff-card { background:rgba(31,41,55,.8); padding:1.5rem; border-radius:1rem; display:flex; gap:1rem; align-items:flex-start; transition:transform .3s; }
+    .diff-card { padding:1.5rem; display:flex; gap:1rem; align-items:flex-start; transition:transform .3s; }
     .diff-card:hover { transform:translateY(-5px); }
     .diff-icon { flex-shrink:0; width:2.5rem; height:2.5rem; }
     .diff-content h4 { font-size:1.125rem; font-weight:600; }
     .diff-content p { margin-top:.25rem; }
 
-    /* MISSION */
-    .mission-card { background:rgba(55,65,81,.6); padding:1.5rem; border-radius:1rem; text-align:center; transition:transform .3s; }
+    .mission-card { padding:1.5rem; text-align:center; transition:transform .3s; }
     .mission-card:hover { transform:translateY(-5px); }
     .mission-icon { width:2.5rem; height:2.5rem; margin:0 auto .75rem; }
 
-    /* MODAL */
     #modal { position:fixed; inset:0; background:rgba(0,0,0,.7); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
     #modal.show { opacity:1; pointer-events:auto; }
     #modal .content { background:inherit; backdrop-filter:blur(15px); padding:2rem; border-radius:1rem; color:inherit; max-width:28rem; width:90%; position:relative; }
     #modalClose { position:absolute; top:.5rem; right:.75rem; background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer; }
 
-    /* CONFETTI CANVAS */
     #confettiCanvas { position:fixed; inset:0; pointer-events:none; opacity:0; transition:opacity .5s; }
 
-    /* BACK TO TOP */
     #backToTop { position:fixed; bottom:1.5rem; right:1.5rem; background:#8b5cf6; color:white; border:none; padding:.75rem; border-radius:9999px; cursor:pointer; opacity:0; pointer-events:none; transition:opacity .3s; }
     #backToTop.show { opacity:1; pointer-events:auto; }
 
-    /* IPHONE MOCKUP */
     .phone-mockup { position:absolute; width:300px; height:650px; top:50%; right:10%; transform:translateY(-50%) scale(0.9); border:16px solid#111827; border-radius:50px; background:#000; box-shadow:0 20px 40px rgba(0,0,0,.5); overflow:hidden; animation:floatPhone 6s ease-in-out infinite; }
     @keyframes floatPhone { 0%,100%{transform:translateY(-50%) scale(0.9);}50%{transform:translateY(-45%) scale(0.92);} }
+    .phone-screen { width: 100%; height: 100%; position: relative; }
+    .phone-image { width: 100%; height: 100%; object-fit: cover; object-position: center; position: absolute; top: 0; left: 0; }
   </style>
 </head>
 <body>
@@ -148,325 +178,215 @@
         </a>
       </div>
 
-   <!-- iPhone Mockup -->
-<div class="phone-mockup">
-  <div class="phone-screen">
-    <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395025757264150669/image_2.png?ex=6878f27a&is=6877a0fa&hm=20f9a7928dcb6b3b8e9c542156bb118723c51f0ea28fa8ef107d0fb25d65b8bc&"
-         alt="Screenshot"
-         class="phone-image">
-  </div>
-</div>
-
-<style>
-  .phone-screen {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-
-  .phone-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-</style>
+      <!-- iPhone Mockup -->
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395025757264150669/image_2.png?ex=6878f27a&is=6877a0fa&hm=20f9a7928dcb6b3b8e9c542156bb118723c51f0ea28fa8ef107d0fb25d65b8bc&"
+               alt="Screenshot"
+               class="phone-image">
+        </div>
+      </div>
     </section>
+
     <!-- Why Choose Clarivex — Award‑Worthy Edition -->
-<section id="why" class="bg-gray-900 text-white py-24 relative overflow-hidden">
-  <!-- Lottie background animation (optional) -->
-  <lottie-player
-    src="https://assets2.lottiefiles.com/packages/lf20_tUtOZB.json"
-    background="transparent"
-    speed="0.8"
-    style="position:absolute; top:-20%; left:-10%; width:120%; height:120%; opacity:0.15;"
-    loop
-    autoplay
-  ></lottie-player>
+    <section id="why" class="bg-gray-900 text-white py-24 relative overflow-hidden">
+      <lottie-player
+        src="https://assets2.lottiefiles.com/packages/lf20_tUtOZB.json"
+        background="transparent"
+        speed="0.8"
+        style="position:absolute; top:-20%; left:-10%; width:120%; height:120%; opacity:0.15;"
+        loop
+        autoplay
+      ></lottie-player>
 
-  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center mb-16">
-    <h2
-      class="text-5xl md:text-6xl font-extrabold mb-4"
-      data-aos="fade-down"
-      data-aos-duration="1200"
-    >
-      Why choose <span class="text-gradient bg-clip-text text-transparent bg-indigo-400">Clarivex</span>?
-    </h2>
-    <p
-      class="text-xl text-indigo-300"
-      data-aos="fade-up"
-      data-aos-duration="1200"
-      data-aos-delay="300"
-    >
-      Your all‑in‑one, award‑winning Discord toolkit: management, scaling & security redefined.
-    </p>
-  </div>
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center mb-16">
+        <h2
+          class="text-5xl md:text-6xl font-extrabold mb-4"
+          data-aos="fade-down"
+          data-aos-duration="1200"
+        >
+          Why choose <span class="text-gradient bg-clip-text text-transparent bg-indigo-400">Clarivex</span>?
+        </h2>
+        <p
+          class="text-xl text-indigo-300"
+          data-aos="fade-up"
+          data-aos-duration="1200"
+          data-aos-delay="300"
+        >
+          Your all‑in‑one, award‑winning Discord toolkit: management, scaling & security redefined.
+        </p>
+      </div>
 
-  <div class="relative z-10 max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6">
-    <!-- Card 1: Advanced Management -->
-    <div
-      class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
-      data-aos="zoom-in"
-      data-aos-duration="800"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-indigo-400 group-hover:scale-110 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h8m-8 4h6"/>
-      </svg>
-      <h4 class="text-2xl font-semibold mb-2">Advanced Management</h4>
-      <p class="text-sm text-indigo-200 mb-4">Slash‑commands per sync ruoli, permessi e canali in un lampo.</p>
-      <span class="text-indigo-300 text-lg font-bold counter" data-target="70">0</span>
-      <p class="text-xs text-indigo-400 mt-1">Commands</p>
-    </div>
+      <div class="relative z-10 max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10 px-6">
+        <!-- Card 1: Advanced Management -->
+        <div
+          class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
+          data-aos="zoom-in"
+          data-aos-duration="800"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-indigo-400 group-hover:scale-110 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h8m-8 4h6"/>
+          </svg>
+          <h4 class="text-2xl font-semibold mb-2">Advanced Management</h4>
+          <p class="text-sm text-indigo-200 mb-4">Slash‑commands per sync ruoli, permessi e canali in un lampo.</p>
+          <span class="text-indigo-300 text-lg font-bold counter" data-target="70">0</span>
+          <p class="text-xs text-indigo-400 mt-1">Commands</p>
+        </div>
+        <!-- Card 2: Real‑Time API -->
+        <div
+          class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
+          data-aos="zoom-in"
+          data-aos-duration="800"
+          data-aos-delay="100"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-green-400 group-hover:rotate-6 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18"/>
+          </svg>
+          <h4 class="text-2xl font-semibold mb-2">Real‑Time API</h4>
+          <p class="text-sm text-indigo-200 mb-4">REST endpoints per XP, inventario & eventi live.</p>
+          <span class="text-green-300 text-lg font-bold counter" data-target="24">0</span>
+          <p class="text-xs text-green-200 mt-1">Endpoints</p>
+        </div>
+        <!-- Card 3: 24/7 Support -->
+        <div
+          class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
+          data-aos="zoom-in"
+          data-aos-duration="800"
+          data-aos-delay="200"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-yellow-400 group-hover:translate-y-1 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8a6 6 0 01-12 0"/>
+          </svg>
+          <h4 class="text-2xl font-semibold mb-2">24/7 Support</h4>
+          <p class="text-sm text-indigo-200 mb-4">Live chat, ticket system & dev‑on‑call.</p>
+          <span class="text-yellow-300 text-lg font-bold counter" data-target="7">0</span>
+          <p class="text-xs text-yellow-200 mt-1">Days a Week</p>
+        </div>
+        <!-- Card 4: Customer Care -->
+        <div
+          class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
+          data-aos="zoom-in"
+          data-aos-duration="800"
+          data-aos-delay="300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-pink-400 group-hover:opacity-80 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6"/>
+          </svg>
+          <h4 class="text-2xl font-semibold mb-2">Customer Care</h4>
+          <p class="text-sm text-indigo-200 mb-4">Community guides & dedicated experts.</p>
+          <span class="text-pink-300 text-lg font-bold counter" data-target="99">0</span>
+          <p class="text-xs text-pink-200 mt-1">Satisfaction %</p>
+        </div>
+      </div>
+    </section>
 
-    <!-- Card 2: Real‑Time API -->
-    <div
-      class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
-      data-aos="zoom-in"
-      data-aos-duration="800"
-      data-aos-delay="100"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-green-400 group-hover:rotate-6 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18"/>
-      </svg>
-      <h4 class="text-2xl font-semibold mb-2">Real‑Time API</h4>
-      <p class="text-sm text-indigo-200 mb-4">REST endpoints per XP, inventario & eventi live.</p>
-      <span class="text-green-300 text-lg font-bold counter" data-target="24">0</span>
-      <p class="text-xs text-green-200 mt-1">Endpoints</p>
-    </div>
-
-    <!-- Card 3: 24/7 Support -->
-    <div
-      class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
-      data-aos="zoom-in"
-      data-aos-duration="800"
-      data-aos-delay="200"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-yellow-400 group-hover:translate-y-1 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8a6 6 0 01-12 0"/>
-      </svg>
-      <h4 class="text-2xl font-semibold mb-2">24/7 Support</h4>
-      <p class="text-sm text-indigo-200 mb-4">Live chat, ticket system & dev‑on‑call.</p>
-      <span class="text-yellow-300 text-lg font-bold counter" data-target="7">0</span>
-      <p class="text-xs text-yellow-200 mt-1">Days a Week</p>
-    </div>
-
-    <!-- Card 4: Customer Care -->
-    <div
-      class="card p-8 bg-gray-800/60 backdrop-blur-lg rounded-2xl text-center group transition hover:-translate-y-4 hover:shadow-2xl"
-      data-aos="zoom-in"
-      data-aos-duration="800"
-      data-aos-delay="300"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 text-pink-400 group-hover:opacity-80 transform transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6"/>
-      </svg>
-      <h4 class="text-2xl font-semibold mb-2">Customer Care</h4>
-      <p class="text-sm text-indigo-200 mb-4">Community guides & dedicated experts.</p>
-      <span class="text-pink-300 text-lg font-bold counter" data-target="99">0</span>
-      <p class="text-xs text-pink-200 mt-1">Satisfaction %</p>
-    </div>
-  </div>
-</section>
-
-<script>
-// Simple on‑scroll counter animation
-document.addEventListener('DOMContentLoaded', () => {
-  const counters = document.querySelectorAll('.counter');
-  const options = { threshold: 0.5 };
-  const cb = entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = +el.dataset.target;
-        let count = 0;
-        const step = Math.ceil(target / 50);
-        const interval = setInterval(() => {
-          count += step;
-          if (count >= target) {
-            el.textContent = target;
-            clearInterval(interval);
-          } else {
-            el.textContent = count;
+    <script>
+    // Simple on‑scroll counter animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const counters = document.querySelectorAll('.counter');
+      const options = { threshold: 0.5 };
+      const cb = entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = +el.dataset.target;
+            let count = 0;
+            const step = Math.ceil(target / 50);
+            const interval = setInterval(() => {
+              count += step;
+              if (count >= target) {
+                el.textContent = target;
+                clearInterval(interval);
+              } else {
+                el.textContent = count;
+              }
+            }, 20);
+            observer.unobserve(el);
           }
-        }, 20);
-        observer.unobserve(el);
-      }
+        });
+      };
+      const observer = new IntersectionObserver(cb, options);
+      counters.forEach(c => observer.observe(c));
     });
-  };
-  const observer = new IntersectionObserver(cb, options);
-  counters.forEach(c => observer.observe(c));
-});
-</script>
-</section>
+    </script>
 
-<script>
-  // Data for each feature slide
-  const features = [
-    {
-      title: 'Blacklist',
-      desc:  'Keep unwanted users out with ease.',
-      img:   'blacklist.jpg'
-    },
-    {
-      title: 'Medals',
-      desc:  'Reward top contributors with custom medals.',
-      img:   'medals.jpg'
-    },
-    {
-      title: 'Profile',
-      desc:  'Personalized member profiles and stats.',
-      img:   'profile.jpg'
-    },
-    {
-      title: 'Warnings',
-      desc:  'Issue, track and appeal warnings seamlessly.',
-      img:   'warnings.jpg'
-    },
-    {
-      title: 'AntiRaid',
-      desc:  'Protect your server from raids automatically.',
-      img:   'antiraid.jpg'
-    }
-  ];
-
-  let current = 0;
-  const titleEl = document.getElementById('feature-title');
-  const descEl  = document.getElementById('feature-desc');
-  const imgEl   = document.getElementById('feature-image');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
-
-  function showFeature(idx) {
-    const { title, desc, img } = features[idx];
-    // simple fade transition
-    titleEl.parentElement.classList.add('opacity-0');
-    setTimeout(() => {
-      titleEl.textContent = title;
-      descEl.textContent  = desc;
-      imgEl.src           = img;
-      titleEl.parentElement.classList.remove('opacity-0');
-    }, 200);
-  }
-
-  prevBtn.onclick = () => {
-    current = (current - 1 + features.length) % features.length;
-    showFeature(current);
-  };
-  nextBtn.onclick = () => {
-    current = (current + 1) % features.length;
-    showFeature(current);
-  };
-
-  // Optional: support left/right arrow keys
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') prevBtn.click();
-    if (e.key === 'ArrowRight') nextBtn.click();
-  });
-
-  // Initialize first slide
-  showFeature(0);
-</script>
-<!-- Swiper CSS -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
-/>
-<!-- Swiper JS (at bottom of <body>) -->
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-<!-- Features on Demand — Swiper Carousel -->
-<section id="features-on-demand" class="bg-gray-800 text-white py-20">
-  <div class="max-w-4xl mx-auto px-6 text-center mb-12">
-    <h2
-      class="text-4xl font-extrabold mb-4"
-      data-aos="fade-down" data-aos-duration="1000"
-    >
-      Features on Demand
-    </h2>
-    <p
-      class="text-lg text-indigo-300"
-      data-aos="fade-up" data-aos-duration="1000"
-      data-aos-delay="200"
-    >
-      Free weekly updates & tools to modernize, organize, and elevate your clan’s ecosystem.
-    </p>
-  </div>
-
-  <div class="relative max-w-sm mx-auto">
-    <!-- iPhone frame -->
-    <div class="iphone-mockup mx-auto mb-6">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <!-- Slide 1: Blacklist -->
-          <div class="swiper-slide flex flex-col items-center">
-            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395027254375092325/image.png?ex=6878f3df&is=6877a25f&hm=1ad8f3ecf7721af86e36167877aae1c765aeb6f47bcc8b0a50a68c9e97e55200&" alt="Blacklist" class="object-cover w-full h-96 rounded-xl shadow-lg" />
-            <h3 class="mt-4 text-2xl font-semibold">Blacklist</h3>
-            <p class="mt-2 text-indigo-300 text-center">Keep unwanted users out automatically.</p>
-          </div>
-          <!-- Slide 2: Medals -->
-          <div class="swiper-slide flex flex-col items-center">
-            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395124196979507390/image.png?ex=68794e28&is=6877fca8&hm=96b27221ace8bc6b7f5eb2e9c48cd2005e3e4f386ff941d7584d3c73e918b7cb&" alt="Medals" class="object-cover w-full h-96 rounded-xl shadow-lg" />
-            <h3 class="mt-4 text-2xl font-semibold">Medals</h3>
-            <p class="mt-2 text-indigo-300 text-center">Reward top contributors with custom badges.</p>
-          </div>
-          <!-- Slide 3: Profile -->
-          <div class="swiper-slide flex flex-col items-center">
-            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395026426822131732/image.png?ex=6878f31a&is=6877a19a&hm=a91cbefa578df18d3f590da73806ec2726d9af813bb07b65612f0e6ea6d19315&" alt="Profile" class="object-cover w-full h-96 rounded-xl shadow-lg" />
-            <h3 class="mt-4 text-2xl font-semibold">Profile</h3>
-            <p class="mt-2 text-indigo-300 text-center">Dynamic member profiles & stats.</p>
-          </div>
-          <!-- Slide 4: Warnings -->
-          <div class="swiper-slide flex flex-col items-center">
-            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395127780382867557/Immagine_2025-07-16_213915.png?ex=6879517f&is=6877ffff&hm=0637ba56cab454ce3c09555bbd9f1e8781f38f5097f1eba3ae89afdf62036653&" alt="Warnings" class="object-cover w-full h-96 rounded-xl shadow-lg" />
-            <h3 class="mt-4 text-2xl font-semibold">Warnings</h3>
-            <p class="mt-2 text-indigo-300 text-center">Issue, track, and appeal warnings seamlessly.</p>
-          </div>
-          <!-- Slide 5: AntiRaid -->
-          <div class="swiper-slide flex flex-col items-center">
-            <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395129419957272646/image.png?ex=68795305&is=68780185&hm=9afdf7c14246f34108b26ce1bdea61333097895add74f44b2bd3cc41477ec902&" alt="AntiRaid" class="object-cover w-full h-96 rounded-xl shadow-lg" />
-            <h3 class="mt-4 text-2xl font-semibold">AntiRaid</h3>
-            <p class="mt-2 text-indigo-300 text-center">Auto‑detect & block raids in seconds.</p>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <!-- Swiper JS (at bottom of <body>) -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <!-- Features on Demand — Swiper Carousel -->
+    <section id="features-on-demand" class="bg-gray-800 text-white py-20">
+      <div class="max-w-4xl mx-auto px-6 text-center mb-12">
+        <h2 class="text-4xl font-extrabold mb-4" data-aos="fade-down" data-aos-duration="1000">
+          Features on Demand
+        </h2>
+        <p class="text-lg text-indigo-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+          Free weekly updates & tools to modernize, organize, and elevate your clan’s ecosystem.
+        </p>
+      </div>
+      <div class="relative max-w-sm mx-auto">
+        <div class="iphone-mockup mx-auto mb-6">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide flex flex-col items-center">
+                <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395027254375092325/image.png?ex=6878f3df&is=6877a25f&hm=1ad8f3ecf7721af86e36167877aae1c765aeb6f47bcc8b0a50a68c9e97e55200&" alt="Blacklist" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+                <h3 class="mt-4 text-2xl font-semibold">Blacklist</h3>
+                <p class="mt-2 text-indigo-300 text-center">Keep unwanted users out automatically.</p>
+              </div>
+              <div class="swiper-slide flex flex-col items-center">
+                <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395124196979507390/image.png?ex=68794e28&is=6877fca8&hm=96b27221ace8bc6b7f5eb2e9c48cd2005e3e4f386ff941d7584d3c73e918b7cb&" alt="Medals" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+                <h3 class="mt-4 text-2xl font-semibold">Medals</h3>
+                <p class="mt-2 text-indigo-300 text-center">Reward top contributors with custom badges.</p>
+              </div>
+              <div class="swiper-slide flex flex-col items-center">
+                <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395026426822131732/image.png?ex=6878f31a&is=6877a19a&hm=a91cbefa578df18d3f590da73806ec2726d9af813bb07b65612f0e6ea6d19315&" alt="Profile" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+                <h3 class="mt-4 text-2xl font-semibold">Profile</h3>
+                <p class="mt-2 text-indigo-300 text-center">Dynamic member profiles & stats.</p>
+              </div>
+              <div class="swiper-slide flex flex-col items-center">
+                <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395127780382867557/Immagine_2025-07-16_213915.png?ex=6879517f&is=6877ffff&hm=0637ba56cab454ce3c09555bbd9f1e8781f38f5097f1eba3ae89afdf62036653&" alt="Warnings" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+                <h3 class="mt-4 text-2xl font-semibold">Warnings</h3>
+                <p class="mt-2 text-indigo-300 text-center">Issue, track, and appeal warnings seamlessly.</p>
+              </div>
+              <div class="swiper-slide flex flex-col items-center">
+                <img src="https://cdn.discordapp.com/attachments/1126190150758715537/1395129419957272646/image.png?ex=68795305&is=68780185&hm=9afdf7c14246f34108b26ce1bdea61333097895add74f44b2bd3cc41477ec902&" alt="AntiRaid" class="object-cover w-full h-96 rounded-xl shadow-lg" />
+                <h3 class="mt-4 text-2xl font-semibold">AntiRaid</h3>
+                <p class="mt-2 text-indigo-300 text-center">Auto‑detect & block raids in seconds.</p>
+              </div>
+            </div>
+            <div class="swiper-button-prev text-indigo-400 hover:text-white"></div>
+            <div class="swiper-button-next text-indigo-400 hover:text-white"></div>
+            <div class="swiper-pagination mt-4"></div>
           </div>
         </div>
-
-        <!-- Navigation arrows -->
-        <div class="swiper-button-prev text-indigo-400 hover:text-white"></div>
-        <div class="swiper-button-next text-indigo-400 hover:text-white"></div>
-        <!-- Pagination dots -->
-        <div class="swiper-pagination mt-4"></div>
       </div>
-    </div>
-  </div>
-</section>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const swiper = new Swiper('.swiper-container', {
-      effect: 'coverflow',
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 'auto',
-      coverflowEffect: {
-        rotate: 20,
-        depth: 200,
-        slideShadows: false,
-      },
-      pagination: { el: '.swiper-pagination', clickable: true },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      autoplay: { delay: 5000, disableOnInteraction: false },
-    });
-    AOS.refresh();
-  });
-</script>
+    </section>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const swiper = new Swiper('.swiper-container', {
+          effect: 'coverflow',
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          coverflowEffect: {
+            rotate: 20,
+            depth: 200,
+            slideShadows: false,
+          },
+          pagination: { el: '.swiper-pagination', clickable: true },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          autoplay: { delay: 5000, disableOnInteraction: false },
+        });
+        AOS.refresh();
+      });
+    </script>
 
     <!-- PRICING / THEM VS US SECTION -->
     <section id="difference" class="bg-gray-800 py-16">
       <div class="container mx-auto px-6 max-w-4xl grid gap-8">
-        <!-- Pricing Highlight -->
         <div class="diff-card" data-aos="fade-up">
           <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -478,7 +398,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>Just €3,99/month—everything included, no hidden fees!</p>
           </div>
         </div>
-        <!-- Quick Setup -->
         <div class="diff-card" data-aos="fade-up" data-aos-delay="100">
           <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4m2 7H7a2 2 0 01-2-2V7a2 2 0 012-2h8" />
@@ -490,7 +409,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>Interactive tutorials get you live in minutes.</p>
           </div>
         </div>
-        <!-- Support & Updates -->
         <div class="diff-card" data-aos="fade-up" data-aos-delay="200">
           <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m2-4h.01M17.657 6.343a8 8 0 11-11.314 11.314a8 8 0 0111.314-11.314z" />
@@ -502,7 +420,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>24/7 live chat, full changelog & weekly guides.</p>
           </div>
         </div>
-        <!-- Impartial & Secure -->
         <div class="diff-card" data-aos="fade-up" data-aos-delay="300">
           <svg class="diff-icon text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -692,56 +609,141 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    /* CONFETTI EFFECT */
+    /* CONFETTI EFFECT — Modern, animated, professional */
     const canvas = document.getElementById('confettiCanvas');
     const ctx = canvas.getContext('2d');
-    function resizeCanvas() { canvas.width = innerWidth; canvas.height = innerHeight; }
-    window.onresize = resizeCanvas;
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * -canvas.height;
-        this.r = Math.random() * 5 + 3;
-        this.sp = Math.random() * 3 + 2;
-        this.c = `hsl(${Math.random() * 360},70%,60%)`;
-        this.tilt = Math.random() * 10 - 10;
-        this.ts = Math.random() * .1 + .05;
+    const SHAPES = ['rect', 'circle', 'triangle'];
+    const CONFETTI_COLORS = [
+      "linear-gradient(90deg,#7f5af0,#2cb67d)",
+      "linear-gradient(90deg,#ff7ac6,#f0a500)",
+      "linear-gradient(90deg,#00cfff,#7f5af0)",
+      "linear-gradient(90deg,#f0a500,#ff7ac6)",
+      "linear-gradient(90deg,#2cb67d,#00cfff)"
+    ];
+
+    function pickGradient(ctx, color, r) {
+      if (!color.startsWith("linear-gradient")) return color;
+      const match = color.match(/linear-gradient\((\d+)deg,([^,]+),([^)]+)\)/);
+      if (!match) return "#fff";
+      const angle = parseInt(match[1]);
+      const c1 = match[2].trim();
+      const c2 = match[3].trim();
+      const grad = ctx.createLinearGradient(
+        -r/2 * Math.cos(angle * Math.PI/180),
+        -r/2 * Math.sin(angle * Math.PI/180),
+        r/2 * Math.cos(angle * Math.PI/180),
+        r/2 * Math.sin(angle * Math.PI/180)
+      );
+      grad.addColorStop(0, c1);
+      grad.addColorStop(1, c2);
+      return grad;
+    }
+
+    class ConfettiParticle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.r = Math.random() * 12 + 10;
+        this.shape = SHAPES[Math.floor(Math.random() * SHAPES.length)];
+        this.color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+        this.opacity = Math.random() * 0.5 + 0.7;
+        this.angle = Math.random() * 2 * Math.PI;
+        this.tilt = Math.random() * Math.PI * 2;
+        this.tiltSpeed = Math.random() * 0.13 + 0.09;
+        this.rot = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 12;
+        this.vx = Math.cos(this.angle) * (Math.random() * 8 + 5);
+        this.vy = Math.sin(this.angle) * (Math.random() * 8 + 5);
+        this.gravity = 0.19 + Math.random() * 0.07;
+        this.drag = 0.982;
+        this.osc = Math.random() * 2 * Math.PI;
+        this.oscSpeed = Math.random() * 0.09 + 0.05;
+        this.glow = Math.random() > 0.5;
       }
       update() {
-        this.y += this.sp;
-        this.x += Math.sin(this.y / 10);
-        this.tilt += this.ts;
-        if (this.y > canvas.height) {
-          this.y = -10;
-          this.x = Math.random() * canvas.width;
-        }
+        this.vx *= this.drag;
+        this.vy += this.gravity;
+        this.x += this.vx + Math.sin(this.osc) * 1.1;
+        this.y += this.vy + Math.cos(this.osc) * 1.1;
+        this.tilt += this.tiltSpeed;
+        this.rot += this.rotSpeed;
+        this.osc += this.oscSpeed;
+        this.opacity -= 0.003;
       }
-      draw() {
-        ctx.beginPath();
-        ctx.lineWidth = this.r / 2;
-        ctx.strokeStyle = this.c;
-        ctx.moveTo(this.x + this.tilt + this.r/2, this.y);
-        ctx.lineTo(this.x + this.tilt, this.y + this.tilt + this.r/2);
-        ctx.stroke();
+      draw(ctx) {
+        ctx.save();
+        ctx.globalAlpha = Math.max(this.opacity, 0);
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.tilt + Math.sin(this.osc) * 0.5);
+        ctx.rotate(this.rot * Math.PI / 180);
+        ctx.shadowColor = this.glow ? "#fff" : "transparent";
+        ctx.shadowBlur = this.glow ? 18 : 0;
+        ctx.fillStyle = pickGradient(ctx, this.color, this.r);
+        switch (this.shape) {
+          case 'rect':
+            ctx.fillRect(-this.r/2, -this.r/6, this.r, this.r/3);
+            break;
+          case 'circle':
+            ctx.beginPath();
+            ctx.arc(0, 0, this.r/2, 0, 2 * Math.PI);
+            ctx.fill();
+            break;
+          case 'triangle':
+            ctx.beginPath();
+            ctx.moveTo(0, -this.r/2);
+            ctx.lineTo(this.r/2, this.r/2);
+            ctx.lineTo(-this.r/2, this.r/2);
+            ctx.closePath();
+            ctx.fill();
+            break;
+        }
+        ctx.restore();
       }
     }
 
-    let particles = [];
-    function startConfetti() {
-      particles = [];
-      for (let i = 0; i < 150; i++) particles.push(new Particle());
+    let confettiParticles = [];
+    function startConfetti(e) {
+      confettiParticles = [];
+      const btn = document.getElementById('ctaBtn');
+      const rect = btn.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const originX = (rect.left + rect.width/2) * dpr;
+      const originY = (rect.top + rect.height/2 + window.scrollY) * dpr;
+      for (let i = 0; i < 100; i++) {
+        confettiParticles.push(new ConfettiParticle(originX, originY));
+      }
       canvas.style.opacity = 1;
       animateConfetti();
-      setTimeout(() => { canvas.style.opacity = 0; }, 3000);
+      btn.classList.add('animate-pulse');
+      setTimeout(() => {
+        canvas.style.opacity = 0;
+        btn.classList.remove('animate-pulse');
+      }, 2200);
     }
     function animateConfetti() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles.forEach(p=>{ p.update(); p.draw(); });
-      if (canvas.style.opacity === "1") requestAnimationFrame(animateConfetti);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confettiParticles.forEach(p => {
+        p.update();
+        p.draw(ctx);
+      });
+      confettiParticles = confettiParticles.filter(p => p.opacity > 0 && p.y < window.innerHeight * 1.2);
+      if (canvas.style.opacity === "1" && confettiParticles.length > 0) {
+        requestAnimationFrame(animateConfetti);
+      }
     }
-    document.getElementById('ctaBtn').onclick = startConfetti;
+    document.getElementById('ctaBtn').addEventListener('click', startConfetti);
   </script>
 </body>
 </html>
