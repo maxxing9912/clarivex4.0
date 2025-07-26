@@ -6,38 +6,112 @@
   <title>Support – Clarivex</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(120deg,#181824 0%,#23234a 60%,#2c2c54 100%);
+      color: #f3f3fa;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    .gradient-header {
+      background: linear-gradient(90deg,#23234a 60%,#7f5af0 100%);
+      box-shadow: 0 2px 24px 0 rgba(44,182,125,0.08);
+      border-bottom: 1px solid #23234a;
+    }
+    .nav-link {
+      color: #b8b8ff;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: color .2s;
+      margin-left: 1.5rem;
+      position: relative;
+      padding-bottom: .25rem;
+      cursor: pointer;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #7f5af0;
+    }
+    .nav-link::after {
+      content:"";
+      position:absolute;
+      left:0; bottom:0;
+      width:0; height:2px;
+      background:currentColor;
+      transition:width .3s;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width:100%; }
+    .support-card {
+      background: linear-gradient(120deg,rgba(44,182,125,0.08),rgba(127,90,240,0.09) 80%);
+      backdrop-filter: blur(12px);
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 32px 0 rgba(44,182,125,0.08);
+      border: 1.5px solid rgba(127,90,240,0.13);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: box-shadow .3s, transform .3s;
+    }
+    .support-card:hover {
+      box-shadow: 0 16px 40px 0 rgba(127,90,240,0.18);
+      transform: translateY(-4px) scale(1.01);
+    }
+    .footer-gradient {
+      background: linear-gradient(90deg,#23234a 60%,#7f5af0 100%);
+      color: #b8b8ff;
+      border-top: 1px solid #23234a;
+    }
+    .footer-gradient a {
+      color: #7f5af0;
+      transition: color .2s;
+    }
+    .footer-gradient a:hover {
+      color: #2cb67d;
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body>
 
-  <header class="bg-gray-800 shadow-md sticky top-0 z-50" data-aos="fade-down">
-    <div class="container mx-auto flex justify-between items-center p-6">
-      <h1 class="text-2xl font-bold">Clarivex</h1>
-      <nav class="space-x-4 text-lg">
-        <a href="index.html" class="hover:text-indigo-400">Home</a>
-        <a href="tos.html" class="hover:text-indigo-400">Terms</a>
-        <a href="privacy.html" class="hover:text-indigo-400">Privacy</a>
-        <a href="support.html" class="hover:text-indigo-400 font-semibold">Support</a>
+  <header class="gradient-header shadow-md sticky top-0 z-50" data-aos="fade-down">
+    <div class="container mx-auto flex justify-between items-center p-6 max-w-5xl">
+      <h1 class="text-2xl font-extrabold tracking-widest">Clarivex</h1>
+      <nav class="space-x-4 text-lg flex">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="tos.html" class="nav-link">Terms</a>
+        <a href="privacy.html" class="nav-link">Privacy</a>
+        <a href="support.html" class="nav-link active font-semibold">Support</a>
       </nav>
     </div>
   </header>
 
-  <main class="max-w-3xl mx-auto px-6 py-20 text-center space-y-8" data-aos="zoom-in">
-    <h2 class="text-4xl font-bold">Support & Contact</h2>
-    <p>If you have any questions or need assistance, reach out to us via Discord or email:</p>
-    <div class="space-y-4 text-lg">
-      <a href="https://discord.gg/4hacJnatjk" target="_blank"
-         class="block bg-indigo-600 hover:bg-indigo-700 py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition">
-        Join Our Discord Server
-      </a>
-      <a href="mailto:s.clarivex@gmail.com"
-         class="block border-2 border-indigo-400 hover:border-indigo-300 py-3 px-6 rounded-full inline-block transition">
-        s.clarivex@gmail.com
-      </a>
-    </div>
+  <main class="max-w-3xl mx-auto px-6 py-20 space-y-8" data-aos="zoom-in">
+    <h2 class="text-4xl font-extrabold text-center mb-6">Support & Contact</h2>
+    <section class="support-card text-center" data-aos="fade-up" data-aos-delay="100">
+      <p class="text-lg mb-4">Need help or have questions? Our team is here for you 24/7.</p>
+      <div class="space-y-4 text-lg">
+        <a href="https://discord.gg/4hacJnatjk" target="_blank"
+           class="block bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition font-semibold">
+          <span class="mr-2">💬</span> Join Our Discord Server
+        </a>
+        <a href="mailto:s.clarivex@gmail.com"
+           class="block border-2 border-indigo-400 hover:border-indigo-300 py-3 px-6 rounded-full inline-block transition font-semibold bg-gray-900 text-indigo-200">
+          <span class="mr-2">📧</span> s.clarivex@gmail.com
+        </a>
+      </div>
+      <p class="mt-6 text-indigo-300 text-sm">For urgent issues, open a ticket in Discord for fastest response.</p>
+    </section>
+    <section class="support-card" data-aos="fade-up" data-aos-delay="200">
+      <h3 class="text-2xl font-semibold mb-2">Frequently Asked Questions</h3>
+      <ul class="list-disc pl-6 space-y-2 text-left text-base">
+        <li><span class="font-bold text-indigo-300">How do I get support?</span> — Use Discord for live chat or email for formal requests.</li>
+        <li><span class="font-bold text-indigo-300">What is the response time?</span> — Most tickets are answered within 2 hours.</li>
+        <li><span class="font-bold text-indigo-300">Can I request a refund?</span> — See our <a href="tos.html">Terms of Service</a> for refund policy.</li>
+        <li><span class="font-bold text-indigo-300">Is my data safe?</span> — Yes, see our <a href="privacy.html">Privacy Policy</a>.</li>
+      </ul>
+    </section>
   </main>
 
-  <footer class="text-center p-6 text-sm bg-gray-900 border-t border-gray-700" data-aos="fade-up">
-    &copy; 2025 Clarivex. All rights reserved.
+  <footer class="footer-gradient text-center p-6 text-sm" data-aos="fade-up">
+    &copy; 2025 Clarivex. All rights reserved. | <a href="index.html">Home</a> | <a href="privacy.html">Privacy</a> | <a href="tos.html">Terms</a>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
