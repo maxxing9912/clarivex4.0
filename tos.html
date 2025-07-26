@@ -6,30 +6,110 @@
   <title>Terms of Service – Clarivex</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(120deg,#181824 0%,#23234a 60%,#2c2c54 100%);
+      color: #f3f3fa;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    .gradient-header {
+      background: linear-gradient(90deg,#23234a 60%,#7f5af0 100%);
+      box-shadow: 0 2px 24px 0 rgba(44,182,125,0.08);
+      border-bottom: 1px solid #23234a;
+    }
+    .nav-link {
+      color: #b8b8ff;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: color .2s;
+      margin-left: 1.5rem;
+      position: relative;
+      padding-bottom: .25rem;
+      cursor: pointer;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #7f5af0;
+    }
+    .nav-link::after {
+      content:"";
+      position:absolute;
+      left:0; bottom:0;
+      width:0; height:2px;
+      background:currentColor;
+      transition:width .3s;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width:100%; }
+    .section-card {
+      background: linear-gradient(120deg,rgba(44,182,125,0.08),rgba(127,90,240,0.09) 80%);
+      backdrop-filter: blur(12px);
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 32px 0 rgba(44,182,125,0.08);
+      border: 1.5px solid rgba(127,90,240,0.13);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: box-shadow .3s, transform .3s;
+    }
+    .section-card:hover {
+      box-shadow: 0 16px 40px 0 rgba(127,90,240,0.18);
+      transform: translateY(-4px) scale(1.01);
+    }
+    .section-card h3 {
+      background: linear-gradient(90deg,#7f5af0,#2cb67d 80%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+    .section-card ul, .section-card ol {
+      margin-top: 1rem;
+    }
+    .section-card a {
+      color: #7f5af0;
+      text-decoration: underline;
+      transition: color .2s;
+    }
+    .section-card a:hover {
+      color: #2cb67d;
+    }
+    .footer-gradient {
+      background: linear-gradient(90deg,#23234a 60%,#7f5af0 100%);
+      color: #b8b8ff;
+      border-top: 1px solid #23234a;
+    }
+    .footer-gradient a {
+      color: #7f5af0;
+      transition: color .2s;
+    }
+    .footer-gradient a:hover {
+      color: #2cb67d;
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body>
 
-  <header class="bg-gray-800 shadow-md sticky top-0 z-50" data-aos="fade-down">
-    <div class="container mx-auto flex justify-between items-center p-6">
-      <h1 class="text-2xl font-bold">Clarivex</h1>
-      <nav class="space-x-4 text-lg">
-        <a href="index.html" class="hover:text-indigo-400">Home</a>
-        <a href="tos.html" class="hover:text-indigo-400 font-semibold">Terms</a>
-        <a href="privacy.html" class="hover:text-indigo-400">Privacy</a>
-        <a href="support.html" class="hover:text-indigo-400">Support</a>
+  <header class="gradient-header shadow-md sticky top-0 z-50" data-aos="fade-down">
+    <div class="container mx-auto flex justify-between items-center p-6 max-w-5xl">
+      <h1 class="text-2xl font-extrabold tracking-widest">Clarivex</h1>
+      <nav class="space-x-4 text-lg flex">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="tos.html" class="nav-link active font-semibold">Terms</a>
+        <a href="privacy.html" class="nav-link">Privacy</a>
+        <a href="support.html" class="nav-link">Support</a>
       </nav>
     </div>
   </header>
 
   <main class="max-w-3xl mx-auto px-6 py-12 space-y-8">
-    <h2 class="text-4xl font-bold text-center" data-aos="fade-up">Clarivex – Terms of Service</h2>
-    <p class="text-gray-400 text-center" data-aos="fade-up" data-aos-delay="100">Last Updated: May 25, 2025</p>
+    <h2 class="text-4xl font-extrabold text-center mb-2" data-aos="fade-up">Clarivex – Terms of Service</h2>
+    <p class="text-indigo-300 text-center mb-8" data-aos="fade-up" data-aos-delay="100">Last Updated: May 25, 2025</p>
 
-    <section data-aos="fade-right" data-aos-delay="200">
+    <section class="section-card" data-aos="fade-right" data-aos-delay="200">
       <p>Welcome to Clarivex. These Terms of Service ("Terms") govern your access to and use of the Clarivex software, services, and systems ("Services"). By accessing or using our Services, you agree to be bound by these Terms.</p>
     </section>
 
-    <section data-aos="fade-left" data-aos-delay="300">
+    <section class="section-card" data-aos="fade-left" data-aos-delay="300">
       <h3 class="text-2xl font-semibold mb-4">1. Definitions</h3>
       <ul class="list-disc pl-6 space-y-2">
         <li>"Clarivex" refers to the automation platform and its associated bot, website, and services.</li>
@@ -39,7 +119,7 @@
       </ul>
     </section>
 
-    <section data-aos="fade-right" data-aos-delay="400">
+    <section class="section-card" data-aos="fade-right" data-aos-delay="400">
       <h3 class="text-2xl font-semibold mb-4">2. Eligibility and Account Responsibilities</h3>
       <ol class="list-decimal pl-6 space-y-2">
         <li>You must be at least 13 years old to use our Services.</li>
@@ -48,7 +128,7 @@
       </ol>
     </section>
 
-    <section data-aos="fade-left" data-aos-delay="500">
+    <section class="section-card" data-aos="fade-left" data-aos-delay="500">
       <h3 class="text-2xl font-semibold mb-4">3. Use of Services</h3>
       <ol class="list-decimal pl-6 space-y-2">
         <li>You may not reverse engineer, duplicate, or redistribute our software without written permission.</li>
@@ -59,7 +139,7 @@
       </ol>
     </section>
 
-    <section data-aos="fade-up" data-aos-delay="600">
+    <section class="section-card" data-aos="fade-up" data-aos-delay="600">
       <h3 class="text-2xl font-semibold mb-4">4. Payments</h3>
       <ol class="list-decimal pl-6 space-y-2">
         <li>All payments are non-refundable except under specific conditions outlined below.</li>
@@ -73,7 +153,7 @@
       </ol>
     </section>
 
-    <section data-aos="fade-up" data-aos-delay="700">
+    <section class="section-card" data-aos="fade-up" data-aos-delay="700">
       <h3 class="text-2xl font-semibold mb-4">5. Ownership and Group Transfers</h3>
       <ol class="list-decimal pl-6 space-y-2">
         <li>Only the verified group owner may request a data or service transfer.</li>
@@ -86,16 +166,16 @@
       </ol>
     </section>
 
-    <section data-aos="fade-left" data-aos-delay="800">
+    <section class="section-card" data-aos="fade-left" data-aos-delay="800">
       <h3 class="text-2xl font-semibold mb-4">6. Data Collection and Privacy</h3>
       <ol class="list-decimal pl-6 space-y-2">
         <li>Clarivex collects basic user identifiers and configuration metadata.</li>
         <li>We do not sell or share user data with third parties.</li>
-        <li>See our <a href="privacy.html" class="text-indigo-400 underline">Privacy Policy</a> for more information.</li>
+        <li>See our <a href="privacy.html">Privacy Policy</a> for more information.</li>
       </ol>
     </section>
 
-    <section data-aos="fade-up" data-aos-delay="900">
+    <section class="section-card" data-aos="fade-up" data-aos-delay="900">
       <h3 class="text-2xl font-semibold mb-4">7. Prohibited Conduct</h3>
       <ul class="list-disc pl-6 space-y-2">
         <li>Abuse the API or attempt to bypass security systems.</li>
@@ -107,7 +187,7 @@
       </ul>
     </section>
 
-    <section data-aos="fade-up" data-aos-delay="1000">
+    <section class="section-card" data-aos="fade-up" data-aos-delay="1000">
       <h3 class="text-2xl font-semibold mb-4">8. Termination</h3>
       <ol class="list-decimal pl-6 space-y-2">
         <li>We reserve the right to suspend or terminate access to Clarivex at any time for violating these Terms.</li>
@@ -115,7 +195,7 @@
       </ol>
     </section>
 
-    <section data-aos="fade-up" data-aos-delay="1100">
+    <section class="section-card" data-aos="fade-up" data-aos-delay="1100">
       <h3 class="text-2xl font-semibold mb-4">9. Limitation of Liability</h3>
       <ul class="list-disc pl-6 space-y-2">
         <li>Loss of profits or revenues.</li>
@@ -125,7 +205,7 @@
       </ul>
     </section>
 
-    <section data-aos="fade-up" data-aos-delay="1200">
+    <section class="section-card" data-aos="fade-up" data-aos-delay="1200">
       <h3 class="text-2xl font-semibold mb-4">10. Changes to Terms</h3>
       <ol class="list-decimal pl-6 space-y-2">
         <li>Clarivex may modify these Terms at any time.</li>
@@ -134,19 +214,19 @@
       </ol>
     </section>
 
-    <section data-aos="fade-up" data-aos-delay="1300">
+    <section class="section-card" data-aos="fade-up" data-aos-delay="1300">
       <h3 class="text-2xl font-semibold mb-4">11. Support & Contact</h3>
-      <p>If you need support, contact us through our official Discord server or open a ticket in the designated support channel. You can also reach us via email at <a href="s.clarivex@gmail.com" class="text-indigo-400 underline">s.clarivex@gmail.com</a>.</p>
+      <p>If you need support, contact us through our official Discord server or open a ticket in the designated support channel. You can also reach us via email at <a href="mailto:s.clarivex@gmail.com">s.clarivex@gmail.com</a>.</p>
     </section>
 
-    <p class="mt-12 text-gray-500 text-center" data-aos="fade-up" data-aos-delay="1400">End of Terms</p>
+    <p class="mt-12 text-indigo-400 text-center text-lg font-semibold" data-aos="fade-up" data-aos-delay="1400">End of Terms</p>
   </main>
 
-  <footer class="text-center p-6 text-sm bg-gray-900 border-t border-gray-700" data-aos="fade-up">
-    &copy; 2025 Clarivex. All rights reserved.
+  <footer class="footer-gradient text-center p-6 text-sm" data-aos="fade-up">
+    &copy; 2025 Clarivex. All rights reserved. | <a href="index.html">Home</a> | <a href="privacy.html">Privacy</a> | <a href="support.html">Support</a>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script> AOS.init({ duration: 600, once: true }); </script>
+  <script> AOS.init({ duration: 700, once: true }); </script>
 </body>
 </html>
