@@ -9,7 +9,6 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-
   <style>
     body { color: #ffffff; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; background: linear-gradient(120deg,#181824 0%,#23234a 60%,#2c2c54 100%); min-height: 100vh; }
 
@@ -50,7 +49,7 @@
     .typewriter .wrap { border-right:.15em solid currentColor; animation:caret .7s steps(1) infinite; }
     @keyframes caret { 50%{border-color:transparent;} }
 
-    .cta-btn {
+    .cta-btn, .learn-btn {
       position: relative;
       overflow: hidden;
       background: linear-gradient(90deg,#7f5af0,#2cb67d 80%);
@@ -60,19 +59,31 @@
       border-radius: 9999px;
       box-shadow: 0 8px 32px 0 rgba(127,90,240,0.18);
       transition: transform .18s cubic-bezier(.4,0,.2,1), box-shadow .18s;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.75rem 2rem;
+      margin-top: 1rem;
+      z-index: 2;
     }
-    .cta-btn:hover, .cta-btn:focus {
+    .cta-btn:focus, .learn-btn:focus {
+      outline: 2px solid #2cb67d;
+      outline-offset: 2px;
+    }
+    .cta-btn:hover, .cta-btn:focus, .learn-btn:hover, .learn-btn:focus {
       transform: scale(1.06) rotate(-1deg);
       box-shadow: 0 12px 40px 0 rgba(44,182,125,0.18);
       background: linear-gradient(90deg,#2cb67d,#7f5af0 80%);
     }
-    @keyframes pulseBtn {
-      0% { box-shadow: 0 0 0 0 rgba(127,90,240,0.5);}
-      70% { box-shadow: 0 0 0 18px rgba(127,90,240,0);}
-      100% { box-shadow: 0 0 0 0 rgba(127,90,240,0);}
-    }
-    .animate-pulse {
-      animation: pulseBtn 0.7s cubic-bezier(.4,0,.6,1) 2;
+    .learn-btn {
+      background: linear-gradient(90deg,#23234a,#7f5af0 80%);
+      color: #fff;
+      font-size: 1rem;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 16px 0 rgba(127,90,240,0.12);
+      transition: all .18s cubic-bezier(.4,0,.2,1);
     }
 
     .feature-card, .diff-card, .mission-card {
@@ -215,25 +226,25 @@
     <header id="header">
       <div class="container mx-auto flex items-center justify-between px-6 max-w-6xl">
         <h1 class="text-3xl font-extrabold select-none">Clarivex</h1>
-        <nav class="hidden md:flex">
-          <a class="nav-link active" data-target="hero">Home</a>
-          <a class="nav-link" href="https://clarivex-store-subs.vercel.app/" target="_blank">Pricing</a>
-          <a class="nav-link" href="tos.html">Terms</a>
-          <a class="nav-link" href="privacy.html">Privacy</a>
-          <a class="nav-link" href="support.html">Support</a>
+        <nav class="hidden md:flex" aria-label="Main navigation">
+          <a class="nav-link active" data-target="hero" href="#hero" title="Go to Home">Home</a>
+          <a class="nav-link" href="https://clarivex-store-subs.vercel.app/" target="_blank" rel="noopener noreferrer" title="See Pricing">Pricing</a>
+          <a class="nav-link" href="tos.html" title="Terms of Service">Terms</a>
+          <a class="nav-link" href="privacy.html" title="Privacy Policy">Privacy</a>
+          <a class="nav-link" href="support.html" title="Support">Support</a>
         </nav>
-        <button id="hamburger" class="md:hidden flex flex-col gap-1">
+        <button id="hamburger" class="md:hidden flex flex-col gap-1" aria-label="Open navigation menu" title="Open navigation menu">
           <span class="block w-6 h-1 bg-indigo-400"></span>
           <span class="block w-6 h-1 bg-indigo-400"></span>
           <span class="block w-6 h-1 bg-indigo-400"></span>
         </button>
       </div>
-      <nav id="mobileNav" class="hidden flex-col bg-gray-800 text-indigo-400 p-6 space-y-4">
-        <a class="nav-link" data-target="hero">Home</a>
-        <a class="nav-link" href="https://clarivex-store-subs.vercel.app/" target="_blank">Pricing</a>
-        <a class="nav-link" href="tos.html">Terms</a>
-        <a class="nav-link" href="privacy.html">Privacy</a>
-        <a class="nav-link" href="support.html">Support</a>
+      <nav id="mobileNav" class="hidden flex-col bg-gray-800 text-indigo-400 p-6 space-y-4" aria-label="Mobile navigation">
+        <a class="nav-link" data-target="hero" href="#hero" title="Go to Home">Home</a>
+        <a class="nav-link" href="https://clarivex-store-subs.vercel.app/" target="_blank" rel="noopener noreferrer" title="See Pricing">Pricing</a>
+        <a class="nav-link" href="tos.html" title="Terms of Service">Terms</a>
+        <a class="nav-link" href="privacy.html" title="Privacy Policy">Privacy</a>
+        <a class="nav-link" href="support.html" title="Support">Support</a>
       </nav>
     </header>
 
@@ -565,11 +576,11 @@
       </div>
     </section>
 
-    <!-- Esempio di card decorata -->
-    <div class="feature-card">
-      <span class="feature-icon">⚡</span>
-      <div class="shine"></div>
-      <div class="glow"></div>
+    <!-- Example of decorated card (replace your .feature-card as needed) -->
+    <div class="feature-card" tabindex="0" aria-label="Discord Integration card">
+      <span class="feature-icon" aria-hidden="true">⚡</span>
+      <div class="shine" aria-hidden="true"></div>
+      <div class="glow" aria-hidden="true"></div>
       <h3>Discord Integration</h3>
       <p>Seamless Discord & Roblox API management for your group.</p>
     </div>
@@ -589,7 +600,9 @@
         id="ctaBtn"
         href="https://discord.com/oauth2/authorize?client_id=1370487453562962101"
         target="_blank"
+        rel="noopener noreferrer"
         class="cta-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg"
+        title="Get Started with Clarivex"
       >
         Get Started Now
       </a>
@@ -599,14 +612,14 @@
 
     <!-- FOOTER -->
     <footer class="bg-gray-900 text-indigo-400 py-6 border-t border-gray-700 text-center">
-      <a href="tos.html" class="hover:text-indigo-300">Terms of Service</a> |
-      <a href="privacy.html" class="hover:text-indigo-300">Privacy Policy</a> |
-      <a href="support.html" class="hover:text-indigo-300">Support</a>
+      <a href="tos.html" class="hover:text-indigo-300" title="Terms of Service">Terms of Service</a> |
+      <a href="privacy.html" class="hover:text-indigo-300" title="Privacy Policy">Privacy Policy</a> |
+      <a href="support.html" class="hover:text-indigo-300" title="Support">Support</a>
       <p class="mt-4">&copy; 2025 Clarivex. All rights reserved.</p>
     </footer>
 
     <!-- BACK TO TOP BUTTON -->
-    <button id="backToTop" title="Back to top">↑</button>
+    <button id="backToTop" title="Back to top" aria-label="Back to top">↑</button>
   </div>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
